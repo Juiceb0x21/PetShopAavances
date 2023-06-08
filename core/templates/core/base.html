@@ -1,0 +1,207 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Site Metas -->
+    <title>PetShop</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="{% static 'core/images/favicon.ico' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'core/images/apple-touch-icon.png' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{% static 'core/css/responsive.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'core/css/custom.css' %}">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js' %}"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js' %}/1.4.2/respond.min.js' %}"></script>
+    <![endif]-->
+
+</head>
+    <header class="main">
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+            <div class="container">
+                <!-- Start Header Navigation -->
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                    <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'core/images/logo.png' %}" class="logo" alt=""></a>
+                </div>
+                
+                <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar sesion</a></li>
+
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Iniciar sesion</a></li>
+                    {% endif %}
+                </ul>
+
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                        <li class="nav-item active"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'cart' %}">Carrito</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'gallery' %}">Mis Pedidos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'contactus' %}">Contactanos</a></li>
+
+                        {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'agregar' %}">Agregar</a></li>
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">Donar</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+
+                <!-- Start Atribute Navigation -->
+                <div class="attr-nav">
+                    <ul>
+                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                    </ul>
+                </div>
+                <!-- End Atribute Navigation -->
+            </div>
+        </nav>
+
+    </header>
+
+    {% block contenido %}
+
+    {% endblock %}
+
+    <footer>
+        <div class="footer-main">
+            <div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-4 col-md-12 col-sm-12">
+						<div class="footer-top-box">
+							<h3>Tiempo Abierto</h3>
+							<ul class="list-time">
+								<li>Lunes - Viernes: 08.00am hasta 05:00pm</li> <li>Sabado: 10:00am hasta 08:00pm</li> <li>Domingo: <span>Cerrado</span></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-12 col-sm-12">
+						<div class="footer-top-box">
+							<h3>
+                                Boletin informativo</h3>
+							<form class="newsletter-box">
+								<div class="form-group">
+									<input class="" type="email" name="Email" placeholder="Correo Electronico*" />
+									<i class="fa fa-envelope"></i>
+								</div>
+								<button class="btn hvr-hover" type="submit">Enviar</button>
+							</form>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-12 col-sm-12">
+						<div class="footer-top-box">
+							<h3>Redes Sociales</h3>
+							<p>Pueden seguirnos y apoyar esta causa.</p>
+							<ul>
+                                <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
+                            </ul>
+						</div>
+					</div>
+				</div>
+				<hr>
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-widget">
+                            <h4>Acerca de PetShop</h4>
+                            <p>Nosotros somos una tienda sobreventa de productos para sus mascotas. todo lo que vendemos aca es parte de nuestra fundacion para cuidar animalitos, todo producto que compres se ira para nuestra fundacion. las compras nos ayudan mucho a gestionar mejor el cuidado de animalitos.</p> 							
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-link">
+                            <h4>Información</h4>
+                            <ul>
+                                <li><a href="#">Acerca de nosotros</a></li>
+                                <li><a href="#">Servicio al cliente</a></li>
+                                <li><a href="#">Nuestro mapa del sitio</a></li>
+                                <li><a href="#">Términos y condiciones</a></li>
+                                <li><a href="#">Política de privacidad</a></li>
+                                <li><a href="#">Información de entrega</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-link-contact">
+                            <h4>Contáctanos</h4>
+                            <ul>
+                                <li>
+                                    <p><i class="fas fa-map-marker-alt"></i>Dirección: Las Mercedes <br>DuocUc<br></p>
+                                </li>
+                                <li>
+                                    <p><i class="fas fa-phone-square"></i>Teléfono: <a href="tel:+1-888705770">+569 99999999</a></p>
+                                </li>
+                                <li>
+                                    <p><i class="fas fa-envelope"></i>Correo electrónico: <a href="mailto:infocontacto@gmail.com">infocontacto@duocuc.cl</a></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer  -->
+
+    <!-- Start copyright  -->
+    <div class="footer-copyright">
+        <p class="footer-company">Todos los derechos reservados. &copy; 2023 <a>PetShop</a> Diseñado Por :
+            <a>Alex Oliva, Isaias Gatica y Alex Pavez</a></p>
+    </div>
+    <!-- End copyright  -->
+
+    <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+
+    {% block js %}
+    <!-- ALL JS FILES -->
+    <script src="{% static 'core/js/carrito.js' %}"></script>
+    <script src="{% static 'core/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'core/js/popper.min.js' %}"></script>
+    <script src="{% static 'core/js/bootstrap.min.js' %}"></script>
+    <!-- ALL PLUGINS -->
+    <script src="{% static 'core/js/jquery.superslides.min.js' %}"></script>
+    <script src="{% static 'core/js/bootstrap-select.js' %}"></script>
+    <script src="{% static 'core/js/inewsticker.js' %}"></script>
+    <script src="{% static 'core/js/bootsnav.js' %}."></script>
+    <script src="{% static 'core/js/images-loded.min.js' %}"></script>
+    <script src="{% static 'core/js/isotope.min.js' %}"></script>
+    <script src="{% static 'core/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'core/js/baguetteBox.min.js' %}"></script>
+    <script src="{% static 'core/js/form-validator.min.js' %}"></script>
+    <script src="{% static 'core/js/contact-form-script.js' %}"></script>
+    <script src="{% static 'core/js/custom.js' %}"></script>
+    
+	
+
+	{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Detalle de producto</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">PetShop</a></li>
+                    <li class="breadcrumb-item active">DETALLE</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+		<div class="colorlib-product">
+			<div class="container">
+				<div class="row row-pb-lg product-detail-wrap">
+					<div class="col-sm-8">
+							<div class="item">
+								<div class="product-entry">
+									<a href="#" class="prod-img">
+										<img src="{{ listaProducto.imagen.url }}" class="container-fluid" alt="Free html5 bootstrap 4 template">
+										
+									</a>
+								</div>
+							</div>						
+					</div>
+					<div class="col-sm-4">
+						<div class="product-desc">
+							<h3>{{listaProducto.nombre}}</h3>
+							<p class="price">
+								<span>${{listaProducto.precio}}</span> 
+								<span class="rate">
+									<img src="{% static 'core/images/estrella.ico' %}" alt="" width="5%">
+									<img src="{% static 'core/images/estrella.ico' %}" alt="" width="5%">
+									<img src="{% static 'core/images/estrella.ico' %}" alt="" width="5%">
+									<img src="{% static 'core/images/estrella.ico' %}" alt="" width="5%">
+									<img src="{% static 'core/images/estrella.ico' %}" alt="" width="5%">
+								</span>
+							</p>
+							<p>{{listaProducto.descripcion}}</p>
+
+                  	<div class="row">
+                        <div class="col-md-12 pills">
+                            <div class="bd-example bd-example-tabs">
+                              <ul class="nav nav-pills mb-7" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                  <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-expanded="true">Recuerda que estos productos son hechos a base de donaciones en nuestra pagina!!
+                                </li>
+                              </ul>
+                              <div class="tab-content" id="pills-tabContent">
+	                  	<div class="col-sm-12 text-center">
+									<p class="addtocart"><a href="{% url 'cart' %}" class="btn btn-dark btn-addtocart">Agregar al carro</a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="row">
+				
+								    </div>
+								  </div>
+								</div>
+				         </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+
+
+
+	{% endblock %}
+

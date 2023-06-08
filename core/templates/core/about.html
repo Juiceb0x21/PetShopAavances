@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+
+    
+    <div class="top-search">
+        <div class="container">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" class="form-control" placeholder="Search">
+                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>DONACION</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">PetShop</a></li>
+                        <li class="breadcrumb-item active">DONACIÓN</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+    <!-- Start About Page  -->
+    <div class="about-box-main">
+        <div class="container">
+            <div class="row">
+				<div class="col-lg-6">
+                    <div class="banner-frame"> <img class="img-fluid" src="{% static 'core/images/gatitos.jpeg' %}" alt="" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="noo-sh-title-top">¿PORQUE DONAR? <span></span></h2>
+                    <p>"¡Bienvenido a nuestra tienda de mascotas! Estamos emocionados de presentarte nuestro programa de suscripción, donde no solo podrás disfrutar de increíbles descuentos en productos y servicios para tus adorables compañeros peludos, sino que también estarás contribuyendo directamente a una causa noble. Con cada suscripción, una parte de los ingresos se destinará a apoyar a una fundación dedicada al bienestar animal. Estamos comprometidos en hacer una diferencia en la vida de aquellos animales menos afortunados, brindándoles los cuidados, refugio y oportunidades que merecen. Al subscribirte, no solo estarás obteniendo beneficios económicos, sino que también estarás desempeñando un papel importante en la protección y el cuidado de los animales necesitados. ¡Únete a nuestra comunidad comprometida y ayúdanos a marcar la diferencia en el mundo de las mascotas!</p>
+					<a class="btn hvr-hover" href="{% url 'checkout' %}">DONAR</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End About Page -->
+
+
+    {% endblock %}

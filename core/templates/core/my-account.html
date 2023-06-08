@@ -1,0 +1,112 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+    <!-- Start Top Search -->
+    <div class="top-search">
+        <div class="container">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" class="form-control" placeholder="Search">
+                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+    <!-- End Top Search -->
+
+    <!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>MI CUENTA</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">PetShop</a></li>
+                        <li class="breadcrumb-item active">Mi Cuenta</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+    <!-- Start My Account  -->
+    <div class="my-account-box-main">
+        <div class="container">
+            <div class="my-account-page">
+                <div class="row">
+                    <div class="col-lg-4 col-md-12">
+                        <div class="account-box">
+                            <div class="service-box">
+                                <div class="service-icon">
+                                    <a href="{% url 'about' %}"> <i class="fa fa-gift"></i> </a>
+                                </div>
+                                <div class="service-desc">
+                                    <h4>Subscripcion</h4>
+                                    <p>Ver beneficios</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="account-box">
+                            <div class="service-box">
+                                <div class="service-icon">
+                                    <a href="#"><i class="fa fa-lock"></i> </a>
+                                </div>
+                                <div class="service-desc">
+                                    <h4>Login &amp; security</h4>
+                                    <p>Cambia tu contraseña, correo y mas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="account-box">
+                            <div class="service-box">
+                                <div class="service-icon">
+                                    <a href="#"> <i class="fa fa-location-arrow"></i> </a>
+                                </div>
+                                <div class="service-desc">
+                                    <h4>Mi direccion</h4>
+                                    <p>Edita tu Direccion</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="account-box">
+                            <div class="service-box">
+                                <div class="service-icon">
+                                    <a href="#"> <i class="fa fa-credit-card"></i> </a>
+                                </div>
+                                <div class="service-desc">
+                                    <h4>Metodos de pago</h4>
+                                    <p>Edit or add payment methods</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="account-box">
+                            <div class="service-box">
+                                <div class="service-icon">
+                                    <a href="#"> <i class="fab fa-paypal"></i> </a>
+                                </div>
+                                <div class="service-desc">
+                                    <h4>PayPal</h4>
+                                    <p>Vincula tu Paypal</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End My Account -->
+
+   
+
+    {% endblock %}
