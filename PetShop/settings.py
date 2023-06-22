@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path, os
 
+from django.contrib.messages import constants as mensajes_error
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -46,7 +48,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'carro',
     'rest_framework',
-    'paypalcheckoutsdk',
+    'autenticacion',
+    'pedidos',
 ]
 
 MIDDLEWARE = [
@@ -164,3 +167,13 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+MESSAGE_TAGS={
+    mensajes_error.DEBUG: 'debug',
+    mensajes_error.INFO: 'info',
+    mensajes_error.SUCCESS: 'success',
+    mensajes_error.WARNING: 'warning',
+    mensajes_error.ERROR: 'danger',
+}
+
+

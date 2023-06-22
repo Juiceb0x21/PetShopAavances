@@ -21,69 +21,17 @@
                 <div class="col-lg-12">
                     <h2>Mis pedidos</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
                         <li class="breadcrumb-item active">Mis pedidos</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+
     
-    <div class="products-box">
-        {% if request.session.carro.items %}
-        {% for key, value in request.session.carro.items %}
-        <div class="product-cart d-flex">
-            <div class="one-forth">
-                <div class="product-img" style="background-image: url({{value.imagen}});">
-                </div>
-                <div class="display-tc">
-                    <h3>{{value.nombre}}</h3>
-                </div>
-            </div>
-            <div class="one-eight text-center">
-                <div class="display-tc">
-                    <span class="price">${{value.precio}}</span>
-                </div>
-            </div>
-            <div class="one-eight text-center">
-                <div class="display-tc">
-                    <div class="row">	
-                        <a href="{% url 'carro:restar' value.producto_id %}" class="btn btn-sm">-</a>
-                            <div class="col">
+    
 
-                                    <p>{{value.cantidad}}</p>
-                                
-                            </div>
-                        
-                        <a href="{% url 'carro:agregar' value.producto_id %}" class="btn btn-sm">+</a>
-                    </div>
-                </div>
-            </div>
-            <div class="one-eight text-center">
-                <div class="display-tc">
-                    <span class="price">${{value.precio2}}</span>
-                </div>
-            </div>
-            <div class="one-eight text-center">
-                <div class="display-tc">
-                    <a href="#" class="closed"></a>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-
-    {% else %}
-    <div class="col-md-12">
-        <tr>
-            <td colspan="12">
-                <div class="alert alert-danger text-center">
-                    Sin Pedidos
-                </div>
-            </td>
-        </tr>
-    </div>
-    {% endif %}
-    </div>
     <!-- End Gallery  -->
 
   

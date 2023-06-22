@@ -4,48 +4,42 @@
 
 {% block contenido %}
 
-		<div class="breadcrumbs">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						<p class="bread"><span><a href="{% url 'index' %}">Incio</a></span> / <span>Compra Completada</span></p>
+<br>
+<br>
+<br>
+<br>
+<div class="container text-center mt-5">
+	<h1 class="display-1">Compra Completa</h1>
+</div>
+<div class="container text-center mt-1">
+	<h1 class="display-4">Su compra se ha realizado correctamente</h1>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="text-center mt-1">
+	<div class="box-add-products">
+		<div class="container-fluid">
+			<div class="row my-3">
+				<div class="col-lg-6 col-md-6 col-sm-12">
+					<div class="offer">
+						<p><a class="btn hvr-hover" href="{% url 'index' %}">Regrsar al inicio</a></p>
 					</div>
 				</div>
-			</div>
-		</div>
-
-
-		<div class="colorlib-product">
-			<div class="container">
-				<div class="row row-pb-lg">
-					<div class="col-sm-10 offset-md-1">
-						<div class="process-wrap">
-							<div class="process text-center active">
-								<p><span>01</span></p>
-								<h3>Carrito de compra</h3>
-							</div>
-							<div class="process text-center active">
-								<p><span>02</span></p>
-								<h3>Verficar</h3>
-							</div>
-							<div class="process text-center active">
-								<p><span>03</span></p>
-								<h3>Orden Completa</h3>
-							</div>
+				<div class="col-lg-6 col-md-6 col-sm-12">
+					<div class="offer">
+						<div class="col-md-15">
+							<p><a class="btn hvr-hover" href="{% url 'gallery' %}">ir a mis pedidos</a></p>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-sm-10 offset-sm-1 text-center">
-						<p class="icon-addcart"><span><i class="icon-check"></i></span></p>
-						<h2 class="mb-4">Gracias por comprar, su orden esta lista</h2>
-						<p>
-							<a href="{% url 'index' %}"class="btn btn-primary btn-outline-primary">Home</a>
-							<a href="shop.html"class="btn btn-primary btn-outline-primary"><i class="icon-shopping-cart"></i> Continue Shopping</a>
-						</p>
-					</div>
-				</div>
 			</div>
 		</div>
+	</div>	
+</div>
 
-		{% endblock %}
+
+{% endblock %}

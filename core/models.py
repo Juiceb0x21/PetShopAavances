@@ -9,6 +9,7 @@ class TipoProducto(models.Model):
 
 class Producto(models.Model):
     nombre = models.CharField(max_length=50)
+    descripcion = models.CharField(max_length=200, default='SOME STRING')
     precio = models.IntegerField()
     stock = models.IntegerField()
     tipo = models.ForeignKey(TipoProducto, on_delete=models.CASCADE)
@@ -17,3 +18,5 @@ class Producto(models.Model):
     def __str__(self):
         return self.nombre
     
+
+

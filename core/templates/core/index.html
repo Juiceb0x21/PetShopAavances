@@ -24,6 +24,7 @@
                         <div class="col-md-12">
                             <h1 class="m-b-20"><strong>Bienvenidos a <br> PetShop</strong></h1>
                             <p class="m-b-25">"¡Bienvenido a nuestra tienda de mascotas, donde los peludos son nuestra pasión! Encuentra todo lo que necesitas para consentir a tu fiel compañero." <br> ellos aprecian mucho tu ayuda!</p>
+                            <p><a class="btn hvr-hover" href="{% url 'subscripcion' %}">Subscribete ahora!!</a></p>
                         </div>
                     </div>
                 </div>
@@ -35,6 +36,7 @@
                         <div class="col-md-12">
                             <h1 class="m-b-20"><strong>Bienvenidos a <br> PetShop</strong></h1>
                             <p class="m-b-40">"¡Bienvenido a nuestra tienda de mascotas, donde los peludos son nuestra pasión! Encuentra todo lo que necesitas para consentir a tu fiel compañero."</p>
+                            <p><a class="btn hvr-hover" href="{% url 'subscripcion' %}">Subscribete ahora!!</a></p>
                         </div>
                     </div>
                 </div>
@@ -46,30 +48,32 @@
                         <div class="col-md-12">
                             <h1 class="m-b-20"><strong>Bienvenidos a <br> PetShop</strong></h1>
                             <p class="m-b-40">"¡Bienvenido a nuestra tienda de mascotas, donde los peludos son nuestra pasión! Encuentra todo lo que necesitas para consentir a tu fiel compañero." <br> ellos aprecian mucho tu ayuda!</p>
-
+                            <p><a class="btn hvr-hover" href="{% url 'subscripcion' %}">Subscribete ahora!!</a></p>
                         </div>
                     </div>
                 </div>
             </li>
         </ul>
-
     </div>
     <!-- End Slider -->
 
     <!-- Start Categories  -->
-    <div class="categories-shop">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="shop-cat-box">
-                        <img class="img-fluid" src="{% static 'core/images/gatito.jpeg' %}" alt="" />
-                        <a class="btn hvr-hover" href="#">Productos</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <div class="box-add-products">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-12">
+					<div class="offer-box-products">
+						<img class="img-fluid" src="{% static 'core/images/gatito.jpeg' %}" alt="" />
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-12">
+					<div class="offer-box-products">
+						<img class="img-fluid" src="{% static 'core/images/gatito.jpeg' %}" alt="" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
     <!-- End Categories -->
 	
     <!-- Start Products  -->
@@ -78,68 +82,57 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="title-all text-center">
-                        <h1>Productos de confianza</h1>
-                        <p>Vendemos calidad para tus mascotas</p>
+                        <h1>Productos mas vendidos</h1>
+                        <p>Aqui encontraras nuestros productos mas vendidos</p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="special-menu text-center">
-                        <div class="button-group filter-button-group">
-                            <button class="activr" data-filter="*">Resumen</button>
-                        </div>
                     </div>
                 </div>
             </div>
-                    <div class="row">
-                        <div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
-                            <h2>Nuestros Productos</h2>
-                        </div>
-                    </div>
-                    <div class="row my-5">
-                        {% for aux in listaProducto %}
-                        <div class="col-md-6 col-lg-3 text-center">
-                            <div class="product-entry border">
-                                <a href="#" class="prod-img">
-                                    <img src="{{ aux.imagen.url }}" class="img-fluid" alt="Free html5 bootstrap 4 template">
-                                </a>
-                                <div class="desc">
-                                    
-                                    {% if user.is_authenticated %}
-                                    <h2><a href="{% url 'productdetail' aux.id %}">{{ aux.nombre }}</a></h2>
-                                    <h2><span class="price">${{ aux.precio }}</span></h2>
-                                    <a href="{% url 'update' aux.id %}" class="fa fa-pen">
-                                        <span><i class="ion-ios-heart"></i></span>
-                                    </a>
-                                    <a href="{% url 'delete' aux.id %}" class="fa fa-trash">
-                                        
-                                    <span><i class="ion-ios-heart"></i></span></a> 
-                                     
-                                     {% else %}
-                                     <h2><a href="{% url 'productdetail' aux.id %}">{{ aux.nombre }}</a></h2>
-                                     <h2><span class="price">${{ aux.precio }}</span></h2>
-                                    {% endif %}
-
-                                    {% if aux.stock > 0 %}
-                                    <h2><span class="price">Disponible: {{aux.stock}}</span></h2>
-                                    <h2><a href="{% url 'carro:agregar' aux.id %}" class="fa fa-shopping-bag"></a></h2>
-                                    {% else %}
-                                    <h2><span class="price">Disponible: Sin stock</span></h2>
-                                    {% endif %}
-                                     
-									
-									
-									
-                                </div>
-                                
+            <div class="row special-list">
+                {% for aux in listaProducto %}
+                <div class="col-lg-3 col-md-6 special-grid best-seller">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">Mas vendido</p>
                             </div>
-                        </div>	
-                     {% endfor %}
-                </div>
-                {% include 'core/paginator.html' %}      
+                            <div class="product-entry">
+                                <img src="{{ aux.imagen.url }}" class="img-fluid" alt="Image">
+                            </div>
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="{% url 'productdetail' aux.id %}" data-toggle="tooltip" data-placement="right" title="Detalle"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="{% url 'wishlist' %}" data-toggle="tooltip" data-placement="right" title="Añadir a wishlist"><i class="far fa-heart"></i></a></li>
+                                    {% if user.is_superuser %}
+                                    <li><a href="{% url 'update' aux.id %}" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fas fa-pen"></i></a></li>
+                                    <li><a href="{% url 'delete' aux.id %}" data-toggle="tooltip" data-placement="right" title="Eliminar" ><i class="fas fa-trash"></i></a></li> 
+                                    {% endif %}
+                                </ul>
+                                <a class="cart" href="{% url 'carro:agregar' aux.id %}">Añadir al carrito</a>
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4>{{ aux.nombre }}</h4>
+                            <h5>${{ aux.precio }}</h5>
+                            {% if aux.stock > 0 %}
+                            <h5>Disponible: {{ aux.stock }}</h5>
+                            {% else %}
+                            <h5>Disponible: Sin Stock</h5>
+                            {% endif %}    
+                        </div>
+                    </div>  
+                </div>  
+                {% endfor %}
             </div>
+            {% include 'core/paginator.html' %}
         </div>
+        
+    </div>
     <!-- End Products  -->
 
     <!-- Start Blog  -->
@@ -164,11 +157,6 @@
                                 <h3>Apoya a una fundacion</h3>
                                 <p>Descubre cómo cuidar adecuadamente a tu mascota con nuestros consejos útiles.</p>
                             </div>
-                            <ul class="option-blog">
-                                <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#"><i class="far fa-comments"></i></a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -182,11 +170,6 @@
                                 <h3>Todo para tus mascotas</h3>
                                 <p>Conoce las últimas tendencias en productos y accesorios para tu mascota.</p>
                             </div>
-                            <ul class="option-blog">
-                                <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#"><i class="far fa-comments"></i></a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -200,11 +183,6 @@
                                 <h3>Los mejores productos para tus mascotas </h3>
                                 <p>Consigue descuentos con una suscripción</p>
                             </div>
-                            <ul class="option-blog">
-                                <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#"><i class="far fa-comments"></i></a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>

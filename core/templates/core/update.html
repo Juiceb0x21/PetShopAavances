@@ -15,16 +15,13 @@
                 <input type="submit" class="btn btn-success" value="Actualizar">
                 
             </form>
-            <br><br><br>
-            
         </div>
     </div>
 </div>
-    
- 
 {% endblock %}
     
 {% block js  %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {% if messages %} 
         {% for aux in messages %} 
             <script>

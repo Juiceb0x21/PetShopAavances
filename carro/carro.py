@@ -21,10 +21,14 @@ class Carro:
         else:
             for key, value in self.carro.items():
                 if key==str(producto.id):
-                    value["cantidad"]=value["cantidad"]+1
-                    value["precio2"]=value["precio2"]+producto.precio
-                    break
+                    if value["cantidad"] == producto.stock:
+                        value["cantidad"]=value["cantidad"]
+                    else: 
+                        value["cantidad"]=value["cantidad"]+1
+                        value["precio2"]=value["precio2"]+producto.precio
+                        break
         self.guardar_carro()
+
 
     def guardar_carro(self):
         self.session["carro"] = self.carro
@@ -49,3 +53,6 @@ class Carro:
     def limpiar_carro(self):
         carro = self.session["carro"] = {}
         self.session.modified=True
+
+    def agregar_pedido(self):
+        self.carro.items()

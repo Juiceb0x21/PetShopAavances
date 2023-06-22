@@ -3,78 +3,56 @@
 {% load static %}
 
 {% block contenido %}
-
+<!-- Start All Title Box -->
 <div class="all-title-box">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <h2>Detalle de producto</h2>
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">PetShop</a></li>
-                    <li class="breadcrumb-item active">DETALLE</li>
+                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+                    <li class="breadcrumb-item active"> Mi Producto </li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
-		<div class="colorlib-product">
-			<div class="container">
-				<div class="row row-pb-lg product-detail-wrap">
-					<div class="col-sm-8">
-							<div class="item">
-								<div class="product-entry">
-									<a href="#" class="prod-img">
-										<img src="{{ listaProducto.imagen.url }}" class="container-fluid" alt="Free html5 bootstrap 4 template">
-										
-									</a>
-								</div>
-							</div>						
-					</div>
-					<div class="col-sm-4">
-						<div class="product-desc">
-							<h3>{{listaProducto.nombre}}</h3>
-							<p class="price">
-								<span>${{listaProducto.precio}}</span> 
-								<span class="rate">
-									<img src="{% static 'core/images/estrella.ico' %}" alt="" width="5%">
-									<img src="{% static 'core/images/estrella.ico' %}" alt="" width="5%">
-									<img src="{% static 'core/images/estrella.ico' %}" alt="" width="5%">
-									<img src="{% static 'core/images/estrella.ico' %}" alt="" width="5%">
-									<img src="{% static 'core/images/estrella.ico' %}" alt="" width="5%">
-								</span>
-							</p>
-							<p>{{listaProducto.descripcion}}</p>
+<!-- End All Title Box -->
 
-                  	<div class="row">
-                        <div class="col-md-12 pills">
-                            <div class="bd-example bd-example-tabs">
-                              <ul class="nav nav-pills mb-7" id="pills-tab" role="tablist">
-                                <li class="nav-item">
-                                  <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-expanded="true">Recuerda que estos productos son hechos a base de donaciones en nuestra pagina!!
-                                </li>
-                              </ul>
-                              <div class="tab-content" id="pills-tabContent">
-	                  	<div class="col-sm-12 text-center">
-									<p class="addtocart"><a href="{% url 'cart' %}" class="btn btn-dark btn-addtocart">Agregar al carro</a></p>
-								</div>
-							</div>
-						</div>
+<div class="shop-detail-box-main">
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-5 col-lg-5 col-md-6">
+				<div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
+					<div class="carousel-inner" role="listbox">
+						<div class="carousel-item active"> <img class="d-block w-100" src="{{ listaProducto.imagen.url }}" alt="First slide"> </div>
 					</div>
 				</div>
+			</div>
+			<div class="col-xl-7 col-lg-7 col-md-6">
+				<div class="single-product-details">
+					<h2>{{listaProducto.nombre}}</h2>
+					<h5><span class="price">${{listaProducto.precio}}</span></h5>
+                    <h2><span class="price">Descripcion Producto</span></h2>
 
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="row">
-				
-								    </div>
-								  </div>
-								</div>
-				         </div>
+					<h5>{{listaProducto.descripcion}}</h5>
+					<br>
+					<div class="price-box-bar">
+						<div class="cart-and-bay-btn">
+							<a class="btn hvr-hover" data-fancybox-close="" href="{% url 'cart' %}">Añadir al carrito</a>
+						</div>
+					</div>
+					<div class="add-to-btn">
+						<div class="add-comp">
+							<a class="btn hvr-hover" href="{% url 'wishlist' %}"><i class="fas fa-heart"></i> wishlist</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+			
+	</div>
+</div>
 
 		
 

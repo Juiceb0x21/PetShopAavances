@@ -1,12 +1,18 @@
 from django.shortcuts import render, redirect
-from .models import *
+from .models import * 
 from .forms import *
 from django.contrib import messages
 from django.core.paginator import Paginator
-from django.contrib.auth.decorators import login_required
+from carro.carro import Carro
+from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from .serializers import *
-import requests 
+import requests
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.shortcuts import get_object_or_404
+from django.db.models.signals import post_save
+from django.dispatch import receiver    
+
 
 # CREANDO CLASE QUE VA A PERMITIR LA TRANSFORMACION
 class ProductoViewset(viewsets.ModelViewSet):
@@ -17,13 +23,15 @@ class TipoProductoViewset(viewsets.ModelViewSet):
     queryset = TipoProducto.objects.all()
     serializer_class = TipoProductoSerializers
 
+
 # Create your views here.
 def index(request):
+    carro = Carro(request)
     productosAll = Producto.objects.all()
     page = request.GET.get('page', 1) # OBTENEMOS LA VARIABLE DE LA URL, SI NO EXISTE NADA DEVUELVE 1
     
     try:
-        paginator = Paginator(productosAll, 8)
+        paginator = Paginator(productosAll, 4)
         productosAll = paginator.page(page)
     except:
         raise Http404
@@ -54,11 +62,31 @@ def indexapi(request):
 
     return render(request, 'core/indexapi.html', data)
 
+def wishlist(request):
+    return render(request, 'core/wishlist.html')
+
+def productos(request):
+    productosAll = Producto.objects.all()
+    page = request.GET.get('page', 1) 
+    
+    try:
+        paginator = Paginator(productosAll, 10)
+        productosAll = paginator.page(page)
+    except:
+        raise Http404
+
+    data = {
+        'listaProductos': productosAll,
+        'paginator': paginator
+    }
+    return render(request, 'core/productos.html', data)
+
 def about(request):
     return render(request, 'core/about.html')
 
-def editar(request):
-    return render(request, 'core/editar.html')
+@login_required
+def subscripcion(request):
+    return render(request, 'core/subscripcion.html')
 
 @login_required
 def cart(request):
@@ -75,9 +103,6 @@ def cart(request):
     }
 
     return render(request, 'core/cart.html')
-
-def checkout(request):
-    return render(request, 'core/checkout.html')
 
 def contactus(request):
     return render(request, 'core/contact-us.html')
@@ -97,6 +122,24 @@ def shop(request):
 
 def ordercomplete(request):
     return render(request, 'core/order-complete.html')
+
+def checkout(request):
+    data = {
+        'form' : DireccionForm()
+    }       
+
+    if request.method == 'POST':
+        formulario = DireccionForm(request.POST)
+        if formulario.is_valid():
+            Nombre = formulario.cleaned_data['Nombre']
+            Apellido = formulario.cleaned_data['Apellido']
+            Ciudad = formulario.cleaned_data['Ciudad']
+            Comuna = formulario.cleaned_data['Comuna']
+            Direccion = formulario.cleaned_data['Direccion']
+            Email = formulario.cleaned_data['Email']
+
+    return render(request, 'core/checkout.html', data)
+
 
 def productdetail(request, id):
     productosAll = Producto.objects.get(id=id)
@@ -119,7 +162,7 @@ def product(request):
             formulario.save()
             messages.success(request, "Producto almacenado correctamente")
 
-        return render(request, 'core/product.html', data)
+    return render(request, 'core/product.html', data)
 
 def update(request,id):
     producto = Producto.objects.get(id=id)
