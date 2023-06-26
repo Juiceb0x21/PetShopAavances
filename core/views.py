@@ -7,7 +7,8 @@ from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets
 from .serializers import *
 import requests 
-
+import requests
+from django.shortcuts import render
 # CREANDO CLASE QUE VA A PERMITIR LA TRANSFORMACION
 class ProductoViewset(viewsets.ModelViewSet):
     queryset = Producto.objects.all()
@@ -142,4 +143,32 @@ def delete(requests,id):
     producto.delete()
     
     return redirect(to = "index")
+
+
+import requests
+
+def gatos(request):
+    # URL de la API para obtener imágenes de gatos
+    api_url_imagenes = 'https://api.thecatapi.com/v1/images/search?limit=5'
+
+    # Realiza la llamada a la API para obtener imágenes de gatos
+    response_imagenes = requests.get(api_url_imagenes)
+    data_imagenes = response_imagenes.json()
+
+    # Extrae las URLs de las imágenes de gatos de la respuesta
+    image_urls = [item['url'] for item in data_imagenes]
+
+    # URL de la API para obtener hechos de gatos
+    api_url_hechos = 'https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=5'
+
+    # Realiza la llamada a la API para obtener hechos de gatos
+    response_hechos = requests.get(api_url_hechos)
+    data_hechos = response_hechos.json()
+
+    # Extrae los hechos de gatos de la respuesta
+    facts = [item['text'] for item in data_hechos]
+
+    # Pasa las URLs de las imágenes y los hechos de gatos a la plantilla
+    return render(request, 'core/gatos.html', {'image_urls': image_urls, 'facts': facts})
+
 

@@ -135,6 +135,17 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="title-all text-center">
+
+                        {% for url in image_urls %}
+    <img src="{{ url }}" alt="Gato">
+{% endfor %}
+
+{% for fact in facts %}
+    <p>{{ fact }}</p>
+{% endfor %}
+
+
+                        
                         <h1>Último blog</h1>
                         <p>Bienvenido a nuestro último blog, donde compartimos consejos y noticias sobre mascotas.</p>
                     </div>
