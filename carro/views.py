@@ -7,14 +7,12 @@ from core.models import Producto
 
 
 # Create your views here.
-
 def agregar_producto(request, producto_id):
     carro=Carro(request)
     producto=Producto.objects.get(id=producto_id)
     carro.agregar(producto=producto)
 
     return redirect("cart")
-
 
 def eliminar_producto(request, producto_id):
     carro=Carro(request)

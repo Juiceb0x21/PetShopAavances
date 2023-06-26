@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+
+<div class="wishlist-box-main">
+    <div class="container">
+        <div class="row">    
+            <div class="col-lg-12">
+                <div class="table-main table-responsive">
+                    
+                    <table class="table" id="tablaUsuarios">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>                            
+                            </tr>
+                        </thead>
+                        {% for aux in lineapedido %}
+                            
+                            <tbody>
+                                <tr>
+                                    <td>{{aux.producto}}</td>
+                                    <td>{{aux.cantidad}}</td>
+                                </tr>
+                            </tbody>
+                           
+                        {% endfor %}
+                    </table>    
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1>Estado: {{pedido.estado}}</h1>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</div>
+
+
+{% endblock %}

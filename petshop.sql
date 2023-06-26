@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 06-06-2023 a las 15:47:40
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.2.0
+-- Host: 127.0.0.1
+-- Generation Time: Jun 25, 2023 at 12:54 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,15 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `petshop`
+-- Database: `petshop`
 --
-CREATE DATABASE IF NOT EXISTS `petshop` DEFAULT CHARACTER SET latin1 COLLATE latin1_spanish_ci;
-USE `petshop`;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `admin_interface_theme`
+-- Table structure for table `admin_interface_theme`
 --
 
 CREATE TABLE `admin_interface_theme` (
@@ -91,7 +89,7 @@ CREATE TABLE `admin_interface_theme` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
--- Volcado de datos para la tabla `admin_interface_theme`
+-- Dumping data for table `admin_interface_theme`
 --
 
 INSERT INTO `admin_interface_theme` (`id`, `name`, `active`, `title`, `title_visible`, `logo`, `logo_visible`, `css_header_background_color`, `title_color`, `css_header_text_color`, `css_header_link_color`, `css_header_link_hover_color`, `css_module_background_color`, `css_module_text_color`, `css_module_link_color`, `css_module_link_hover_color`, `css_module_rounded_corners`, `css_generic_link_color`, `css_generic_link_hover_color`, `css_save_button_background_color`, `css_save_button_background_hover_color`, `css_save_button_text_color`, `css_delete_button_background_color`, `css_delete_button_background_hover_color`, `css_delete_button_text_color`, `list_filter_dropdown`, `related_modal_active`, `related_modal_background_color`, `related_modal_rounded_corners`, `logo_color`, `recent_actions_visible`, `favicon`, `related_modal_background_opacity`, `env_name`, `env_visible_in_header`, `env_color`, `env_visible_in_favicon`, `related_modal_close_button_visible`, `language_chooser_active`, `language_chooser_display`, `list_filter_sticky`, `form_pagination_sticky`, `form_submit_sticky`, `css_module_background_selected_color`, `css_module_link_selected_color`, `logo_max_height`, `logo_max_width`, `foldable_apps`, `language_chooser_control`, `list_filter_highlight`, `list_filter_removal_links`, `show_fieldsets_as_tabs`, `show_inlines_as_tabs`, `css_generic_link_active_color`, `collapsible_stacked_inlines`, `collapsible_stacked_inlines_collapsed`, `collapsible_tabular_inlines`, `collapsible_tabular_inlines_collapsed`) VALUES
@@ -100,7 +98,7 @@ INSERT INTO `admin_interface_theme` (`id`, `name`, `active`, `title`, `title_vis
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `auth_group`
+-- Table structure for table `auth_group`
 --
 
 CREATE TABLE `auth_group` (
@@ -108,10 +106,20 @@ CREATE TABLE `auth_group` (
   `name` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
+--
+-- Dumping data for table `auth_group`
+--
+
+INSERT INTO `auth_group` (`id`, `name`) VALUES
+(3, 'administradores'),
+(2, 'cliente'),
+(4, 'Suscriptor'),
+(1, 'Vendedor');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `auth_group_permissions`
+-- Table structure for table `auth_group_permissions`
 --
 
 CREATE TABLE `auth_group_permissions` (
@@ -120,10 +128,74 @@ CREATE TABLE `auth_group_permissions` (
   `permission_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
+--
+-- Dumping data for table `auth_group_permissions`
+--
+
+INSERT INTO `auth_group_permissions` (`id`, `group_id`, `permission_id`) VALUES
+(6, 1, 29),
+(7, 1, 30),
+(8, 1, 31),
+(1, 1, 32),
+(2, 1, 37),
+(3, 1, 38),
+(4, 1, 39),
+(5, 1, 40),
+(9, 2, 36),
+(10, 3, 1),
+(11, 3, 2),
+(12, 3, 3),
+(13, 3, 4),
+(14, 3, 5),
+(15, 3, 6),
+(16, 3, 7),
+(17, 3, 8),
+(18, 3, 9),
+(19, 3, 10),
+(20, 3, 11),
+(21, 3, 12),
+(22, 3, 13),
+(23, 3, 14),
+(24, 3, 15),
+(25, 3, 16),
+(26, 3, 17),
+(27, 3, 18),
+(28, 3, 19),
+(29, 3, 20),
+(30, 3, 21),
+(31, 3, 22),
+(32, 3, 23),
+(33, 3, 24),
+(34, 3, 25),
+(35, 3, 26),
+(36, 3, 27),
+(37, 3, 28),
+(38, 3, 29),
+(39, 3, 30),
+(40, 3, 31),
+(41, 3, 32),
+(42, 3, 33),
+(43, 3, 34),
+(44, 3, 35),
+(45, 3, 36),
+(46, 3, 37),
+(47, 3, 38),
+(48, 3, 39),
+(49, 3, 40),
+(50, 3, 41),
+(51, 3, 42),
+(52, 3, 43),
+(53, 3, 44),
+(54, 3, 45),
+(55, 3, 46),
+(56, 3, 47),
+(57, 3, 48),
+(58, 4, 40);
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `auth_permission`
+-- Table structure for table `auth_permission`
 --
 
 CREATE TABLE `auth_permission` (
@@ -134,7 +206,7 @@ CREATE TABLE `auth_permission` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
--- Volcado de datos para la tabla `auth_permission`
+-- Dumping data for table `auth_permission`
 --
 
 INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALUES
@@ -173,12 +245,28 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (33, 'Can add producto', 9, 'add_producto'),
 (34, 'Can change producto', 9, 'change_producto'),
 (35, 'Can delete producto', 9, 'delete_producto'),
-(36, 'Can view producto', 9, 'view_producto');
+(36, 'Can view producto', 9, 'view_producto'),
+(37, 'Can add productos', 10, 'add_productos'),
+(38, 'Can change productos', 10, 'change_productos'),
+(39, 'Can delete productos', 10, 'delete_productos'),
+(40, 'Can view productos', 10, 'view_productos'),
+(41, 'Can add linea pedido', 11, 'add_lineapedido'),
+(42, 'Can change linea pedido', 11, 'change_lineapedido'),
+(43, 'Can delete linea pedido', 11, 'delete_lineapedido'),
+(44, 'Can view linea pedido', 11, 'view_lineapedido'),
+(45, 'Can add pedido', 12, 'add_pedido'),
+(46, 'Can change pedido', 12, 'change_pedido'),
+(47, 'Can delete pedido', 12, 'delete_pedido'),
+(48, 'Can view pedido', 12, 'view_pedido'),
+(49, 'Can add tipo seguimiento', 13, 'add_tiposeguimiento'),
+(50, 'Can change tipo seguimiento', 13, 'change_tiposeguimiento'),
+(51, 'Can delete tipo seguimiento', 13, 'delete_tiposeguimiento'),
+(52, 'Can view tipo seguimiento', 13, 'view_tiposeguimiento');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `auth_user`
+-- Table structure for table `auth_user`
 --
 
 CREATE TABLE `auth_user` (
@@ -196,16 +284,17 @@ CREATE TABLE `auth_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
--- Volcado de datos para la tabla `auth_user`
+-- Dumping data for table `auth_user`
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$216000$NaxboLfEhI3X$vC/EXLW548rhl0KwHtETsCSwsZCkaRNhH6t93WGoOhU=', '2023-06-06 13:32:21.656842', 1, 'alex', '', '', 'al.pavezf@duocuc.cl', 1, 1, '2023-06-06 13:22:15.172069');
+(1, 'pbkdf2_sha256$216000$NaxboLfEhI3X$vC/EXLW548rhl0KwHtETsCSwsZCkaRNhH6t93WGoOhU=', '2023-06-24 22:06:20.169064', 1, 'alex', '', '', 'al.pavezf@duocuc.cl', 1, 1, '2023-06-06 13:22:15.172069'),
+(8, 'pbkdf2_sha256$216000$wUDb3KjPRoI4$gtlzFRIIdGPn0kQ3CryPIaxbn958oVmHS1PpYu3VLIo=', '2023-06-24 22:02:59.480134', 0, 'manuelsoto', '', '', 'manuelsoto@gmail.com', 0, 1, '2023-06-23 04:43:20.833050');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `auth_user_groups`
+-- Table structure for table `auth_user_groups`
 --
 
 CREATE TABLE `auth_user_groups` (
@@ -214,10 +303,20 @@ CREATE TABLE `auth_user_groups` (
   `group_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
+--
+-- Dumping data for table `auth_user_groups`
+--
+
+INSERT INTO `auth_user_groups` (`id`, `user_id`, `group_id`) VALUES
+(5, 1, 1),
+(11, 1, 4),
+(7, 8, 2),
+(12, 8, 4);
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `auth_user_user_permissions`
+-- Table structure for table `auth_user_user_permissions`
 --
 
 CREATE TABLE `auth_user_user_permissions` (
@@ -229,7 +328,7 @@ CREATE TABLE `auth_user_user_permissions` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `core_producto`
+-- Table structure for table `core_producto`
 --
 
 CREATE TABLE `core_producto` (
@@ -238,20 +337,22 @@ CREATE TABLE `core_producto` (
   `precio` int(11) NOT NULL,
   `stock` int(11) NOT NULL,
   `imagen` varchar(100) NOT NULL,
-  `tipo_id` int(11) NOT NULL
+  `tipo_id` int(11) NOT NULL,
+  `descripcion` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
--- Volcado de datos para la tabla `core_producto`
+-- Dumping data for table `core_producto`
 --
 
-INSERT INTO `core_producto` (`id`, `nombre`, `precio`, `stock`, `imagen`, `tipo_id`) VALUES
-(1, 'Correa para perro', 15000, 0, 'correa_larga_de_entrenamiento_1.jpg', 1);
+INSERT INTO `core_producto` (`id`, `nombre`, `precio`, `stock`, `imagen`, `tipo_id`, `descripcion`) VALUES
+(3, 'Correa para perro', 8, 2, 'correa_larga_de_entrenamiento_1_uIkLDbf.jpg', 1, 'Correa para perro'),
+(4, 'Correa para perro de cuero', 20000, 17, 'Mejores-correas-para-perros-rantow-amazon.jpg', 1, 'Correa para perro de cuero');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `core_tipoproducto`
+-- Table structure for table `core_tipoproducto`
 --
 
 CREATE TABLE `core_tipoproducto` (
@@ -260,7 +361,7 @@ CREATE TABLE `core_tipoproducto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
--- Volcado de datos para la tabla `core_tipoproducto`
+-- Dumping data for table `core_tipoproducto`
 --
 
 INSERT INTO `core_tipoproducto` (`id`, `descripcion`) VALUES
@@ -269,7 +370,7 @@ INSERT INTO `core_tipoproducto` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `django_admin_log`
+-- Table structure for table `django_admin_log`
 --
 
 CREATE TABLE `django_admin_log` (
@@ -284,17 +385,59 @@ CREATE TABLE `django_admin_log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
--- Volcado de datos para la tabla `django_admin_log`
+-- Dumping data for table `django_admin_log`
 --
 
 INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`, `action_flag`, `change_message`, `content_type_id`, `user_id`) VALUES
 (1, '2023-06-06 13:27:35.721466', '1', 'objetos para perro', 1, '[{\"added\": {}}]', 8, 1),
-(2, '2023-06-06 13:28:09.116803', '1', 'Correa para perro', 1, '[{\"added\": {}}]', 9, 1);
+(2, '2023-06-06 13:28:09.116803', '1', 'Correa para perro', 1, '[{\"added\": {}}]', 9, 1),
+(3, '2023-06-14 04:40:26.187951', '2', 'Ola', 1, '[{\"added\": {}}]', 9, 1),
+(4, '2023-06-14 04:40:59.631014', '1', 'Correa para perro', 3, '', 9, 1),
+(5, '2023-06-14 04:41:26.707270', '2', 'Ola', 3, '', 9, 1),
+(6, '2023-06-14 04:42:11.780722', '3', 'Correa para perro', 1, '[{\"added\": {}}]', 9, 1),
+(7, '2023-06-14 04:43:11.029883', '4', 'Correa para perro de cuero', 1, '[{\"added\": {}}]', 9, 1),
+(8, '2023-06-20 23:56:13.641665', '9', '9', 3, '', 12, 1),
+(9, '2023-06-20 23:56:13.751275', '8', '8', 3, '', 12, 1),
+(10, '2023-06-20 23:56:13.797843', '7', '7', 3, '', 12, 1),
+(11, '2023-06-20 23:56:13.902462', '6', '6', 3, '', 12, 1),
+(12, '2023-06-20 23:56:13.933703', '5', '5', 3, '', 12, 1),
+(13, '2023-06-20 23:56:13.965044', '4', '4', 3, '', 12, 1),
+(14, '2023-06-20 23:56:13.996334', '3', '3', 3, '', 12, 1),
+(15, '2023-06-20 23:56:14.042969', '2', '2', 3, '', 12, 1),
+(16, '2023-06-20 23:56:14.075409', '1', '1', 3, '', 12, 1),
+(17, '2023-06-21 00:38:16.349554', '10', '10', 3, '', 12, 1),
+(18, '2023-06-23 04:21:15.000527', '1', 'Vendedor', 1, '[{\"added\": {}}]', 4, 1),
+(19, '2023-06-23 04:22:10.924943', '2', 'cliente', 1, '[{\"added\": {}}]', 4, 1),
+(20, '2023-06-23 04:22:49.121317', '3', 'administradores', 1, '[{\"added\": {}}]', 4, 1),
+(21, '2023-06-23 04:25:38.084776', '4', 'alexp', 3, '', 5, 1),
+(22, '2023-06-23 04:25:38.147522', '5', 'alexpavez', 3, '', 5, 1),
+(23, '2023-06-23 04:25:38.178465', '6', 'alexpavez1', 3, '', 5, 1),
+(24, '2023-06-23 04:25:38.235740', '7', 'manuel soto', 3, '', 5, 1),
+(25, '2023-06-23 04:25:42.914489', '3', 'manolo7', 3, '', 5, 1),
+(26, '2023-06-23 04:38:01.265455', '4', 'Suscriptor', 1, '[{\"added\": {}}]', 4, 1),
+(27, '2023-06-24 21:05:57.557958', '25', '25', 3, '', 12, 1),
+(28, '2023-06-24 21:05:57.639678', '24', '24', 3, '', 12, 1),
+(29, '2023-06-24 21:05:57.702164', '23', '23', 3, '', 12, 1),
+(30, '2023-06-24 21:05:57.733411', '22', '22', 3, '', 12, 1),
+(31, '2023-06-24 21:05:57.797708', '21', '21', 3, '', 12, 1),
+(32, '2023-06-24 21:05:57.947521', '20', '20', 3, '', 12, 1),
+(33, '2023-06-24 21:05:57.981955', '19', '19', 3, '', 12, 1),
+(34, '2023-06-24 21:05:58.013199', '18', '18', 3, '', 12, 1),
+(35, '2023-06-24 21:05:58.106929', '17', '17', 3, '', 12, 1),
+(36, '2023-06-24 21:05:58.263087', '16', '16', 3, '', 12, 1),
+(37, '2023-06-24 21:05:58.325331', '15', '15', 3, '', 12, 1),
+(38, '2023-06-24 21:05:58.356794', '14', '14', 3, '', 12, 1),
+(39, '2023-06-24 21:05:58.388109', '13', '13', 3, '', 12, 1),
+(40, '2023-06-24 21:05:58.427103', '12', '12', 3, '', 12, 1),
+(41, '2023-06-24 21:05:58.463970', '11', '11', 3, '', 12, 1),
+(42, '2023-06-24 22:06:40.162041', '28', '28', 3, '', 12, 1),
+(43, '2023-06-24 22:06:40.222840', '27', '27', 3, '', 12, 1),
+(44, '2023-06-24 22:06:40.285403', '26', '26', 3, '', 12, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `django_content_type`
+-- Table structure for table `django_content_type`
 --
 
 CREATE TABLE `django_content_type` (
@@ -304,7 +447,7 @@ CREATE TABLE `django_content_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
--- Volcado de datos para la tabla `django_content_type`
+-- Dumping data for table `django_content_type`
 --
 
 INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
@@ -315,13 +458,17 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (5, 'auth', 'user'),
 (6, 'contenttypes', 'contenttype'),
 (9, 'core', 'producto'),
+(10, 'core', 'productos'),
 (8, 'core', 'tipoproducto'),
+(11, 'pedidos', 'lineapedido'),
+(12, 'pedidos', 'pedido'),
+(13, 'pedidos', 'tiposeguimiento'),
 (7, 'sessions', 'session');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `django_migrations`
+-- Table structure for table `django_migrations`
 --
 
 CREATE TABLE `django_migrations` (
@@ -332,7 +479,7 @@ CREATE TABLE `django_migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
--- Volcado de datos para la tabla `django_migrations`
+-- Dumping data for table `django_migrations`
 --
 
 INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
@@ -384,12 +531,15 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (46, 'auth', '0011_update_proxy_permissions', '2023-06-06 13:16:11.581731'),
 (47, 'auth', '0012_alter_user_first_name_max_length', '2023-06-06 13:16:11.595786'),
 (48, 'core', '0001_initial', '2023-06-06 13:16:11.624794'),
-(49, 'sessions', '0001_initial', '2023-06-06 13:16:11.672767');
+(49, 'sessions', '0001_initial', '2023-06-06 13:16:11.672767'),
+(50, 'pedidos', '0001_initial', '2023-06-20 21:43:18.547415'),
+(51, 'pedidos', '0002_auto_20230620_1532', '2023-06-20 22:32:47.716868'),
+(52, 'pedidos', '0003_auto_20230624_1718', '2023-06-24 21:18:46.990333');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `django_session`
+-- Table structure for table `django_session`
 --
 
 CREATE TABLE `django_session` (
@@ -399,32 +549,86 @@ CREATE TABLE `django_session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
--- Volcado de datos para la tabla `django_session`
+-- Dumping data for table `django_session`
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('d1e6jdmvcka0h6agnigkeao757vauy9g', '.eJxVjEEOgyAQRe8y64YwCFhcdt8zmBkYq20jCejKePfWxI3b_977G0QqJUO37TfoaV3Gfq1S-ilBBwiXjSl-ZD5AetP8yirmeSkTq0NRJ63qmZN8H6d7ORipjv-6da2kYMho0g7joA0PwbLEYJC8ZW6Ctz5FZwTFOq-xEZL2PgRG1I2F_Qd00ztI:1qBl6J:xkkmYcUAtvJDYy2QJbc9FO1rMR4X6VLrIUgzf1ntvfM', '2023-07-04 23:49:31.745148'),
+('ehmea7fbsl4igmigl4af8etqwx4gbrmr', 'eyJjYXJybyI6e319:1qDBQF:wNPlVNPvtG4J9DMulK1ZLoGHoDGidLYFI0X6yWy2NTU', '2023-07-08 22:07:59.796583'),
+('imay9hl3jh2ehcuq7r7ikcn234ghmteg', 'eyJjYXJybyI6e319:1qCvvU:QFeh4hFY06G_VZbQEi5fECDtz1DMM7aDSIlDJSMkk0A', '2023-07-08 05:35:12.839932'),
+('x0n3zqwpvccszqvvcfdwwpuknzx2lo6o', '.eJxVjs2KwzAMhF9l0Tm4tvOfY3cvhe4zGNlWEreNHZzkVPLu65Sy0MsgaWY-9ASDMQbonpAfMsdgN7MG5Sx0eQY-TDoSdPAdYiT8mjEmoaOSpTAZl7rQ_C8SuiZLTL86iwkhMnATDuRT6jSRdXgyL5J6YBxQWVLk10geJ5eGoITaLvfrj-7ZbR5g3zNQuK2j2haKr6dAwMdNo7mTPwx7Qz8EZkICOs2OCHu7C_sNlh7nd_YDMOIypnZd1mRbiZIjL4XpudR9W2gyrRRYFVrnbVVU1pSSBBVlxUVOSHXTt1oInhew_wH8Pm3m:1qD9fz:HEvr6M0U61snDHoDdb-woLftCXWwXI9mlCy9-TIDK6Y', '2023-07-08 20:16:07.863680'),
 ('zc7jhb6z288l1rwqdvj1a45l4a7ae47i', '.eJxVjk1ugzAQha9SzRo5tjFQWKbrnsEa2wM4DTYysIq4e-00qpTN0-j9fJoHWEwpwvAAUWRN0R12j9o7GEQFIS4mEQzwFVMi_FgxZaEyqXKZrM9bEA3n_N-QeVmMKrPD7h3-ofyCE4XcvizkPF7sk6jvmCbUjjSFPVHAxecjasFu6wTnWYHGY5_1sVF6PpX_fPMM2h8KJXA3DFNkNmaQN6xU2Cvd2Hd0dL--um-AGbc5r7umI9dLlBx5I-zIpRl7Zcj2UmCrjKn7VrXONpIEqabloiak7nPsjRC8VnD-Ap8RbH4:1q6WnN:MDlLaXyhDORcxIHCBVk8CC-9k-itn-guihK5gBqXLsM', '2023-06-20 13:32:21.657845');
 
+-- --------------------------------------------------------
+
 --
--- Índices para tablas volcadas
+-- Table structure for table `pedidos_lineapedido`
+--
+
+CREATE TABLE `pedidos_lineapedido` (
+  `id` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `pedido_id` int(11) NOT NULL,
+  `producto_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `estado` varchar2(50) NOT NULL 
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+CREATE TABLE `carro` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `producto_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `pedidos_pedido` (
+  `id` int(11) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `estado` varchar2(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+--
+-- Dumping data for table `pedidos_pedido`
+--
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pedidos_tiposeguimiento`
+--
+
+CREATE TABLE `pedidos_tiposeguimiento` (
+  `id` int(11) NOT NULL,
+  `seguimiento` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `admin_interface_theme`
+-- Indexes for table `admin_interface_theme`
 --
 ALTER TABLE `admin_interface_theme`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `admin_interface_theme_name_30bda70f_uniq` (`name`);
 
 --
--- Indices de la tabla `auth_group`
+-- Indexes for table `auth_group`
 --
 ALTER TABLE `auth_group`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Indices de la tabla `auth_group_permissions`
+-- Indexes for table `auth_group_permissions`
 --
 ALTER TABLE `auth_group_permissions`
   ADD PRIMARY KEY (`id`),
@@ -432,21 +636,21 @@ ALTER TABLE `auth_group_permissions`
   ADD KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`);
 
 --
--- Indices de la tabla `auth_permission`
+-- Indexes for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`);
 
 --
--- Indices de la tabla `auth_user`
+-- Indexes for table `auth_user`
 --
 ALTER TABLE `auth_user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- Indices de la tabla `auth_user_groups`
+-- Indexes for table `auth_user_groups`
 --
 ALTER TABLE `auth_user_groups`
   ADD PRIMARY KEY (`id`),
@@ -454,7 +658,7 @@ ALTER TABLE `auth_user_groups`
   ADD KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`);
 
 --
--- Indices de la tabla `auth_user_user_permissions`
+-- Indexes for table `auth_user_user_permissions`
 --
 ALTER TABLE `auth_user_user_permissions`
   ADD PRIMARY KEY (`id`),
@@ -462,20 +666,20 @@ ALTER TABLE `auth_user_user_permissions`
   ADD KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`);
 
 --
--- Indices de la tabla `core_producto`
+-- Indexes for table `core_producto`
 --
 ALTER TABLE `core_producto`
   ADD PRIMARY KEY (`id`),
   ADD KEY `core_producto_tipo_id_e0e92ad1_fk_core_tipoproducto_id` (`tipo_id`);
 
 --
--- Indices de la tabla `core_tipoproducto`
+-- Indexes for table `core_tipoproducto`
 --
 ALTER TABLE `core_tipoproducto`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `django_admin_log`
+-- Indexes for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
   ADD PRIMARY KEY (`id`),
@@ -483,144 +687,198 @@ ALTER TABLE `django_admin_log`
   ADD KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`);
 
 --
--- Indices de la tabla `django_content_type`
+-- Indexes for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`);
 
 --
--- Indices de la tabla `django_migrations`
+-- Indexes for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `django_session`
+-- Indexes for table `django_session`
 --
 ALTER TABLE `django_session`
   ADD PRIMARY KEY (`session_key`),
   ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- Indexes for table `pedidos_lineapedido`
+--
+ALTER TABLE `pedidos_lineapedido`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pedidos_lineapedido_user_id_096951d1_fk_auth_user_id` (`user_id`),
+  ADD KEY `pedidos_lineapedido_pedido_id_8e7e2da6_fk_pedidos_pedido_id` (`pedido_id`),
+  ADD KEY `pedidos_lineapedido_producto_id_4ae1f0c1_fk_core_producto_id` (`producto_id`);
+
+--
+-- Indexes for table `pedidos_pedido`
+--
+ALTER TABLE `pedidos_pedido`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pedidos_pedido_user_id_fa9489fb_fk_auth_user_id` (`user_id`);
+
+--
+-- Indexes for table `pedidos_tiposeguimiento`
+--
+ALTER TABLE `pedidos_tiposeguimiento`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `admin_interface_theme`
+-- AUTO_INCREMENT for table `admin_interface_theme`
 --
 ALTER TABLE `admin_interface_theme`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `auth_group`
+-- AUTO_INCREMENT for table `auth_group`
 --
 ALTER TABLE `auth_group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `auth_group_permissions`
+-- AUTO_INCREMENT for table `auth_group_permissions`
 --
 ALTER TABLE `auth_group_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
--- AUTO_INCREMENT de la tabla `auth_permission`
+-- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- AUTO_INCREMENT de la tabla `auth_user`
+-- AUTO_INCREMENT for table `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT de la tabla `auth_user_groups`
+-- AUTO_INCREMENT for table `auth_user_groups`
 --
 ALTER TABLE `auth_user_groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT de la tabla `auth_user_user_permissions`
+-- AUTO_INCREMENT for table `auth_user_user_permissions`
 --
 ALTER TABLE `auth_user_user_permissions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `core_producto`
+-- AUTO_INCREMENT for table `core_producto`
 --
 ALTER TABLE `core_producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT de la tabla `core_tipoproducto`
+-- AUTO_INCREMENT for table `core_tipoproducto`
 --
 ALTER TABLE `core_tipoproducto`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `django_admin_log`
+-- AUTO_INCREMENT for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
--- AUTO_INCREMENT de la tabla `django_content_type`
+-- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT de la tabla `django_migrations`
+-- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- Restricciones para tablas volcadas
+-- AUTO_INCREMENT for table `pedidos_lineapedido`
+--
+ALTER TABLE `pedidos_lineapedido`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `pedidos_pedido`
+--
+ALTER TABLE `pedidos_pedido`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `pedidos_tiposeguimiento`
+--
+ALTER TABLE `pedidos_tiposeguimiento`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `auth_group_permissions`
+-- Constraints for table `auth_group_permissions`
 --
 ALTER TABLE `auth_group_permissions`
   ADD CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   ADD CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`);
 
 --
--- Filtros para la tabla `auth_permission`
+-- Constraints for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
   ADD CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`);
 
 --
--- Filtros para la tabla `auth_user_groups`
+-- Constraints for table `auth_user_groups`
 --
 ALTER TABLE `auth_user_groups`
   ADD CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   ADD CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 
 --
--- Filtros para la tabla `auth_user_user_permissions`
+-- Constraints for table `auth_user_user_permissions`
 --
 ALTER TABLE `auth_user_user_permissions`
   ADD CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   ADD CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 
 --
--- Filtros para la tabla `core_producto`
+-- Constraints for table `core_producto`
 --
 ALTER TABLE `core_producto`
   ADD CONSTRAINT `core_producto_tipo_id_e0e92ad1_fk_core_tipoproducto_id` FOREIGN KEY (`tipo_id`) REFERENCES `core_tipoproducto` (`id`);
 
 --
--- Filtros para la tabla `django_admin_log`
+-- Constraints for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
   ADD CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   ADD CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+
+--
+-- Constraints for table `pedidos_lineapedido`
+--
+ALTER TABLE `pedidos_lineapedido`
+  ADD CONSTRAINT `pedidos_lineapedido_pedido_id_8e7e2da6_fk_pedidos_pedido_id` FOREIGN KEY (`pedido_id`) REFERENCES `pedidos_pedido` (`id`),
+  ADD CONSTRAINT `pedidos_lineapedido_producto_id_4ae1f0c1_fk_core_producto_id` FOREIGN KEY (`producto_id`) REFERENCES `core_producto` (`id`),
+  ADD CONSTRAINT `pedidos_lineapedido_user_id_096951d1_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+
+--
+-- Constraints for table `pedidos_pedido`
+--
+ALTER TABLE `pedidos_pedido`
+  ADD CONSTRAINT `pedidos_pedido_user_id_fa9489fb_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

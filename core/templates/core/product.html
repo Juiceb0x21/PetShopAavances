@@ -25,6 +25,7 @@
 {% endblock %}
     
 {% block js  %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {% if messages %} 
         {% for aux in messages %} 
             <script>
@@ -32,9 +33,7 @@
             title: 'Confirmación',
             text: '{{ aux }}',
             icon: 'success',
-            showCancelButton: true,
             confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
             confirmButtonText: 'Confirmar'
             })
             </script>

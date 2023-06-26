@@ -2,199 +2,136 @@
 
 {% load static %}
 
+{% load crispy_forms_tags %}
+
 {% block contenido %}
 
-
-    <!-- Start Top Search -->
-    <div class="top-search">
-        <div class="container">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+<!-- Start Cart  -->
+<div class="cart-box-main">
+    <div class="container">
+        <div class="row new-account-login">
+            <div class="col-sm-6 col-lg-6 mb-3">
             </div>
         </div>
-    </div>
-    <!-- End Top Search -->
-
-    <!-- Start All Title Box -->
-    <div class="all-title-box">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2>CONFIRMACION</h2>
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">PetShop</a></li>
-                        <li class="breadcrumb-item active">Confirmacion</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End All Title Box -->
-
-    <!-- Start Cart  -->
-    <div class="cart-box-main">
-        <div class="container">
-            <div class="row new-account-login">
-                <div class="col-sm-6 col-lg-6 mb-3">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-lg-6 mb-3">
-                    <div class="checkout-address">
-                        <div class="title-left">
-                            <h3>Direccion</h3>
-                        </div>
-                        <form class="needs-validation" novalidate>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="firstName">Nombre *</label>
-                                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-                                    <div class="invalid-feedback"> Se requiere un nombre válido. </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="lastName">Last name *</label>
-                                    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-                                    <div class="invalid-feedback"> Se requiere apellido válido. </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="username">Nombre de usuario *</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="username" placeholder="" required>
-                                    <div class="invalid-feedback" style="width: 100%;"> Su nombre de usuario es requerido.</div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email">Email *</label>
-                                <input type="email" class="form-control" id="email" placeholder="">
-                                <div class="invalid-feedback"> 
-                                    Ingrese una dirección de correo electrónico válida para actualizaciones de envío. </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="address">Address *</label>
-                                <input type="text" class="form-control" id="address" placeholder="" required>
-                                <div class="invalid-feedback"> 
-                                    Por favor introduzca su direccion de envio. </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="address2">
-                                    Dirección 2 *</label>
-                                <input type="text" class="form-control" id="address2" placeholder=""> </div>
-                            <div class="row">
-                                <div class="col-md-5 mb-3">
-                                    <label for="country">
-                                        País *</label>
-                                    <select class="wide w-100" id="country">
-									<option value="Choose..." data-display="Select">
-                                        Elegir...</option>
-									<option value="United States">
-                                        Chile</option>
-								</select>
-                                    <div class="invalid-feedback"> 
-                                        Seleccione un país válido. </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="state">Ciudad *</label>
-                                    <select class="wide w-100" id="state">
-									<option data-display="Select">
-                                        Elegir...</option>
-									<option>Santiago</option>
-								</select>
-                                    <div class="invalid-feedback"> Invalido </div>
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label for="zip">Código postal *</label>
-                                    <input type="text" class="form-control" id="zip" placeholder="" required>
-                                    <div class="invalid-feedback"> 
-                                        Código postal requerido. </div>
-                                </div>
-                            </div>
-                            <hr class="mb-4">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="same-address">
-                                <label class="custom-control-label" for="same-address">
-                                    La dirección de envío es la misma que mi dirección de facturación</label>
-                            </div>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="save-info">
-                                <label class="custom-control-label" for="save-info">
-                                    Guarda esta información para la próxima vez</label>
-                            </div>
-                            <hr class="mb-4">
-                            <hr class="mb-1"> </form>
+        <div class="row">
+            <div class="col-sm-6 col-lg-6 mb-3">
+                <div class="checkout-address">
+                    <div class="title-left">
+                        <h3>Datos Personales</h3>
                     </div>
-                </div>
-                <div class="col-sm-6 col-lg-6 mb-3">
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12">
-                            <div class="shipping-method-box">
-            
-                        <div class="col-md-12 col-lg-12">
-                            <div class="order-box">
-                                <div class="title-left"> <span>Pago</span> </div>
-                            <div class="d-block my-3">
-                                <div class="custom-control custom-radio">
-                                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                                    <label class="custom-control-label" for="credit">Tarjeta de crédito</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-                                    <label class="custom-control-label" for="debit">Tarjeta de débito</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-                                    <label class="custom-control-label" for="paypal">Paypal</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="cc-name">Nombre en la tarjeta</label>
-                                    <input type="text" class="form-control" id="cc-name" placeholder="" required> <small class="text-muted">Full name as displayed on card</small>
-                                    <div class="invalid-feedback"> 
-                                        Se requiere el nombre en la tarjeta </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="cc-number">Número de Tarjeta de Crédito</label>
-                                    <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                                    <div class="invalid-feedback"> Número de Tarjeta de Crédito requerido </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 mb-3">
-                                    <label for="cc-expiration">Expiracion</label>
-                                    <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                                    <div class="invalid-feedback"> Fecha de expiracion </div>
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label for="cc-expiration">CVV</label>
-                                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                                    <div class="invalid-feedback"> Codigo de seguridad </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="payment-icon">
-                                        <ul>
-                                            <li><img class="img-fluid" src="images/payment-icon/1.png" alt=""></li>
-                                            <li><img class="img-fluid" src="images/payment-icon/2.png" alt=""></li>
-                                            <li><img class="img-fluid" src="images/payment-icon/3.png" alt=""></li>
-                                            <li><img class="img-fluid" src="images/payment-icon/5.png" alt=""></li>
-                                            <li><img class="img-fluid" src="images/payment-icon/7.png" alt=""></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                </div>
-
-                        </div>
-                        <div class="col-12 d-flex shopping-box"> <a href="#" class="ml-auto btn hvr-hover">DONAR</a> </div>
-                    </div>
+                    <form class="needs-validation" novalidate>
+                        <form method="POST" enctype="multipart/form-data" id="form">
+                            {% csrf_token %}
+                            <table >
+                                {{ form | crispy}}
+                            </table>
+                        </form>                      
+                    </form>
                 </div>
             </div>
-
+            <div class="col-sm-6 col-lg-6 mb-3">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                </div>
+                {% if request.session.carro.items %}
+                    <div class="col-md-12 col-lg-12">
+                        <div class="order-box">
+                            <div class="title-left">
+                                <h3>Tu Orden </h3>
+                            </div>
+                            <hr class="my-1">
+                            <div class="d-flex">
+                                <h4>Sub Total</h4>
+                                <div class="ml-auto font-weight-bold">${{importe_total_carro}}</div>
+                            </div>
+                            <div class="d-flex">
+                                <h4>Descuento</h4>
+                                <div class="ml-auto font-weight-bold">${{descuento|floatformat:"2"}}</div>
+                            </div>
+                            <hr class="my-1">
+                            <div class="d-flex gr-total">
+                                <h5>Total</h5>
+                                <div class="ml-auto h5">${{totaldes}}</div>
+                            </div>
+                            <div class="d-flex gr-total">
+                                <h5>Total en dolares</h5>
+                                <div class="ml-auto h5">${{dolar}}</div>
+                            </div>
+                            <hr> </div>
+                    </div>
+                {% endif %}
+                    <div class="col-sm-12 text-center">
+						<div id = "btnPaypal"></div>
+					</div>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- End Cart -->
+</div>
+
+{% endblock %}
+<!-- End Cart -->
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
 
-
-    {% endblock %}
+<script>
+	paypal.Button.render({
+		env: 'sandbox',
+		client: {
+			sandbox: 'Afkl4-gUYgFYYyRADItq-Ed5k26u51koPZJ-gEj_JQ0Eh7spquxj5TjlcyyEPkKtK1s3fvb9UPVpG6nH',
+			production: 'demo_production_client_id'
+		},
+		locale: 'es_CL',
+		style: {
+			size: 'large',
+			color: 'gold',
+			shape: 'rect'
+		},
+		commit: true,
+			
+    payment: function (data, actions) {
+		
+				return actions.payment.create({
+					transactions: [{
+						amount: { 
+							total: '{{dolar}}', // EL TOTAL DEL CARRITO DE COMPRA
+							currency: 'USD'
+						}
+					}]
+				})	
+	},
+	onAuthorize: function (data, actions) {
+		return actions.payment.execute().then(function () {
+			// LA LOGICA DE LO QUE PASA LUEGO DEL PAGO	
+			var url = "{% url 'pedidos:procesar_pedido' %}"
+			window.location.href = url;
+		});
+	},
+	onCancel(data) {
+		Swal.fire({
+				title:'Cancelado',
+				text: 'Transacción cancelada!',
+				icon: 'error',
+				showCancelButton: false,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Confirmar'
+			})
+	},
+	onError(err) {
+		Swal.fire({
+				title:'Error',
+				text: 'Ha ocurrido un error con el pago',
+				icon: 'error',
+				showCancelButton: false,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Confirmar'
+			})
+	}
+	}, '#btnPaypal');
+</script>
+{% endblock %}

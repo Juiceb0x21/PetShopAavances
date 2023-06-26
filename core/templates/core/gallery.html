@@ -4,87 +4,68 @@
 
 {% block contenido %}
 
-    <!-- Start Top Search -->
-    <div class="top-search">
-        <div class="container">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
-            </div>
-        </div>
-    </div>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
     
-    <div class="all-title-box">
+<div class="all-title-box">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <h2>Mis pedidos</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
                         <li class="breadcrumb-item active">Mis pedidos</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-    
-    <div class="products-box">
-        {% if request.session.carro.items %}
-        {% for key, value in request.session.carro.items %}
-        <div class="product-cart d-flex">
-            <div class="one-forth">
-                <div class="product-img" style="background-image: url({{value.imagen}});">
-                </div>
-                <div class="display-tc">
-                    <h3>{{value.nombre}}</h3>
-                </div>
-            </div>
-            <div class="one-eight text-center">
-                <div class="display-tc">
-                    <span class="price">${{value.precio}}</span>
-                </div>
-            </div>
-            <div class="one-eight text-center">
-                <div class="display-tc">
-                    <div class="row">	
-                        <a href="{% url 'carro:restar' value.producto_id %}" class="btn btn-sm">-</a>
-                            <div class="col">
 
-                                    <p>{{value.cantidad}}</p>
-                                
+    <div class="wishlist-box-main">
+        <div class="container">
+            <div class="row">    
+                <div class="col-lg-12">
+                    <div class="table-main table-responsive">
+                        <table class="table" id="tablaUsuarios">
+                            <thead>
+                                <tr>
+                                    <th>Id Pedido</th>
+                                    <th>Usuario</th>
+                                    <th>Fecha</th>
+                                    <th>Detalle</th>
+                                </tr>
+                            </thead>
+                            {% for aux in LineaPedido %}
+                                {% if aux.user_id == user.id %}
+                                <tbody>
+                                    <tr>
+                                        <td>{{aux.id}}</td>
+                                        <td>{{aux.user}}</td>
+                                        <td>{{aux.create_at|date:'Y-m-d'}}</td>
+                                        <td><a href="{% url 'detallepedido' aux.id%}">Detalle</a></td>
+                                    </tr>
+                                </tbody>
+                                {% endif %}
+                            {% endfor %}
+                        </table>    
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
+                        <div class="product-categori">
+                            <div class="filter-sidebar-left">
+                                <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
+                                    
+                                </div>
                             </div>
-                        
-                        <a href="{% url 'carro:agregar' value.producto_id %}" class="btn btn-sm">+</a>
+                        </div>
                     </div>
                 </div>
+                
             </div>
-            <div class="one-eight text-center">
-                <div class="display-tc">
-                    <span class="price">${{value.precio2}}</span>
-                </div>
-            </div>
-            <div class="one-eight text-center">
-                <div class="display-tc">
-                    <a href="#" class="closed"></a>
-                </div>
-            </div>
+            
         </div>
-        {% endfor %}
-
-    {% else %}
-    <div class="col-md-12">
-        <tr>
-            <td colspan="12">
-                <div class="alert alert-danger text-center">
-                    Sin Pedidos
-                </div>
-            </td>
-        </tr>
+        
     </div>
-    {% endif %}
-    </div>
-    <!-- End Gallery  -->
-
+    
   
     {% endblock %}

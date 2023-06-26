@@ -28,13 +28,42 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'core/css/custom.css' %}">
 
+    <link rel="stylesheet" href="{% static 'core/css/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' %}">
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js' %}"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js' %}/1.4.2/respond.min.js' %}"></script>
     <![endif]-->
 
 </head>
-    <header class="main">
+    <!-- Start Main Top -->
+    <div class="main-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-11 col-md-6 col-sm-12 col-xs-12">
+                    <div class="our-link">
+                        <ul>
+                            {% if user.is_authenticated %}
+                            <li><a href="{% url 'logout' %}"><i class="fa fa-user s_color"></i> Cerrar Sesion</a></li>
+                            {% if user.is_superuser %}
+                            <li><a href="{% url 'myaccount' %}"><i class="fa fa-user s_color"></i> {{user.username}}  ( admin ) </a></li>
+                            {% else %}
+                            <li><a href="{% url 'myaccount' %}"><i class="fa fa-user s_color"></i> {{user.username}}</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'contactus' %}"><i class="fas fa-headset"></i> Contactanos</a></li>
+                            {% else %}
+                            <li><a href="{% url 'login' %}"><i class="fas-user s_color"></i>Iniciar Sesion</a></li>
+                            <li><a href="{% url 'Autenticacion' %}"><i class="fas-user s_color"></i>Registrarse</a></li>
+                            <li><a href="{% url 'contactus' %}"><i class="fas fa-headset"></i> Contactanos</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>         
+    <!-- End Main Top -->
+
+    <header class="main-header">
         <!-- Start Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
             <div class="container">
@@ -43,44 +72,31 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'core/images/logo.png' %}" class="logo" alt=""></a>
+                    <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'core/images/logo.png' %}" class="logo" alt="" width="180px" height="140px"></a>
                 </div>
                 
-                <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                    {% if user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar sesion</a></li>
-
-                    {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Iniciar sesion</a></li>
-                    {% endif %}
-                </ul>
-
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                         <li class="nav-item active"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'cart' %}">Carrito</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'productos' %}">productos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'gallery' %}">Mis Pedidos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'contactus' %}">Contactanos</a></li>
-
-                        {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'agregar' %}">Agregar</a></li>
-                        {% else %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">Donar</a></li>
+                        {% if user.is_superuser %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'product' %}">Agregar</a></li>
                         {% endif %}
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
-
-                <!-- Start Atribute Navigation -->
-                <div class="attr-nav">
-                    <ul>
-                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                    </ul>
-                </div>
-                <!-- End Atribute Navigation -->
-            </div>
+                <ul>
+                    <li class="side-menu">
+						<a href="{% url 'cart' %}">
+							<i class="fa fa-shopping-bag"></i>
+							<span class="badge">{{cantidad_carro}}</span>		
+						</a>
+					</li>
+                </ul>
+            </div>         
         </nav>
-
     </header>
 
     {% block contenido %}
@@ -89,17 +105,17 @@
 
     <footer>
         <div class="footer-main">
-            <div class="container-fluid">
+            <div class="container">
 				<div class="row">
 					<div class="col-lg-4 col-md-12 col-sm-12">
 						<div class="footer-top-box">
 							<h3>Tiempo Abierto</h3>
 							<ul class="list-time">
-								<li>Lunes - Viernes: 08.00am hasta 05:00pm</li> <li>Sabado: 10:00am hasta 08:00pm</li> <li>Domingo: <span>Cerrado</span></li>
+								<li>Lunes - Viernes: 08:00am hasta 05:00pm</li> <li>Sabado: 10:00am hasta 08:00pm</li> <li>Domingo: <span>Cerrado</span></li>
 							</ul>
 						</div>
 					</div>
-					<div class="col-lg-4 col-md-12 col-sm-12">
+					<div class="col-lg-7 col-md-12 col-sm-12">
 						<div class="footer-top-box">
 							<h3>
                                 Boletin informativo</h3>
@@ -110,21 +126,6 @@
 								</div>
 								<button class="btn hvr-hover" type="submit">Enviar</button>
 							</form>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-12 col-sm-12">
-						<div class="footer-top-box">
-							<h3>Redes Sociales</h3>
-							<p>Pueden seguirnos y apoyar esta causa.</p>
-							<ul>
-                                <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
-                            </ul>
 						</div>
 					</div>
 				</div>
@@ -177,11 +178,10 @@
             <a>Alex Oliva, Isaias Gatica y Alex Pavez</a></p>
     </div>
     <!-- End copyright  -->
-
     <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
-
     {% block js %}
     <!-- ALL JS FILES -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{% static 'core/js/carrito.js' %}"></script>
     <script src="{% static 'core/js/jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'core/js/popper.min.js' %}"></script>
@@ -200,7 +200,7 @@
     <script src="{% static 'core/js/custom.js' %}"></script>
     
 	
-
+    
 	{% endblock %}
 </body>
 

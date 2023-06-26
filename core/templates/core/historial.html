@@ -1,0 +1,94 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+
+
+<div class="container mt-3">
+    <h1>Informacion de tu pedido</h1> 
+    <p>Aqui puedes ver el estado de tus pedidos</p>
+    <rb></rb>
+  
+    <div id="accordion">
+
+        <div class="card">
+          <div class="card-header">
+            
+                <h5>Id de la compra: {{pedido.id}}</h5> 
+                <div class="progress">
+                {% if pedido.seguimiento_id == 1 %}
+                    <div class="progress-bar bg-info" style="width:25%">
+                        Validación
+                    </div>
+                {% elif pedido.seguimiento_id == 2 %}
+                    <div class="progress-bar bg-primary" style="width:50%">
+                        Preparación
+                    </div>
+                {% elif pedido.seguimiento_id == 3 %}
+                    <div class="progress-bar bg-warning" style="width:75%">
+                        Reparto
+                    </div>
+                {% elif pedido.seguimiento_id == 4 %}
+                    <div class="progress-bar bg-success" style="width:100%">
+                        Entregado
+                    </div>
+                {% else %}
+                    <div class="progress-bar bg-danger" style="width:0%">
+                        Cancelado
+                    </div>
+                {% endif %}
+                </div>
+            
+          </div>
+          <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+            <div class="card-body">
+                <div class="container mt-3">
+                    
+                    <h1>Productos comprados:</h1>
+                    <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for aux in lineapedido %}
+                          <tr>
+                            
+                            <td>{{aux.producto}}</td>
+                            <td>{{aux.cantidad}}</td>
+                            
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th>Metodo de pago</th>
+                            <td>PayPal</td>
+                          </tr>
+                        </thead>
+                      </table>
+                </div> <br></br>
+                {% if pedido.seguimiento_id == 1 %}
+                <h4 class="text-info">En Validación</h4>
+                {% elif pedido.seguimiento_id == 2 %}
+                <h4 class="text-primary">En Preparación</h4>
+                {% elif pedido.seguimiento_id == 3 %}
+                <h4 class="text-warning">En Reparto</h4>
+                {% elif pedido.seguimiento_id == 4 %}
+                <h4 class="text-success">Pedido completado</h4>
+                {% else %}
+                <h4 class="text-success">Pedido Cancelado</h4>
+                {% endif %}
+              
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

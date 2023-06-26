@@ -2,228 +2,132 @@
 
 {% load static %}
 
-
 {% block contenido %}
 
-    <!-- Start Top Search -->
-    <div class="top-search">
-        <div class="container">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+<!-- Start Top Search -->
+<div class="top-search">
+    <div class="container">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            <input type="text" class="form-control" placeholder="Search">
+            <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+        </div>
+    </div>
+</div>
+<!-- End Top Search -->
+
+<!-- Start All Title Box -->
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>CARRITO</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+                    <li class="breadcrumb-item active">Mi Carrito</li>
+                </ul>
             </div>
         </div>
     </div>
-    <!-- End Top Search -->
+</div>
+<!-- End All Title Box -->
 
-    <!-- Start All Title Box -->
-    <div class="all-title-box">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2>CARRITO</h2>
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">PetShop</a></li>
-                        <li class="breadcrumb-item active">Mi Carrito</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End All Title Box -->
-
-    <!-- Start Cart  -->
-    <div class="cart-box-main">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="table-main table-responsive">
-                        <table class="table">
-                            <thead>
+<div class="cart-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-main table-responsive">
+                    {% if request.session.carro.items %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Nombre del producto</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                            
+                            <tbody>
+                                {% for key, value in request.session.carro.items %}
                                 <tr>
-                                    <th>Imagenes</th>
-                                    <th>Nombre del Producto</th>
-                                    <th>Precio</th>
-                                    <th>Cantidad</th>
-                                    <th>Total</th>
-                                    <th>Borrar</th>
+                                    <td class="thumbnail-img">
+                                        <a href="#">
+                                    <img class="img-fluid" src="{{value.imagen}}" alt="" />
+                                </a>
+                                    </td>
+                                    <td class="name-pr">
+                                        <a href="#">
+                                    {{value.nombre}}
+                                </a>
+                                    </td>
+                                    <td class="precio-pr">
+                                        {% if value.cantidad < 2 %}
+                                        <p>${{value.precio}}</p>
+                                        {% else %}
+                                        <p>${{value.precio2}}</p>
+                                        {% endif %}
+                                    </td>
+                                    <td class="quantity-box">
+                                        <a href="{% url 'carro:restar' value.producto_id %}" class="btn btn-sm">-</a>
+                                        <a href="{% url 'carro:agregar' value.producto_id %}" class="btn btn-sm">+</a>
+                                    </td>
+                                    <td class="remove-pr">
+                                        <a href="{% url 'carro:eliminar' value.producto_id %}">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                                    </td>
                                 </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row my-5">
-                {% if request.session.carro.items %}
-								{% for key, value in request.session.carro.items %}
-								<div class="product-cart d-flex">
-									<div class="one-forth">
-										<div class="product-img" style="background-image: url({{value.imagen}});">
-										</div>
-										<div class="display-tc">
-											<h3>{{value.nombre}}</h3>
-										</div>
-									</div>
-									<div class="one-eight text-center">
-										<div class="display-tc">
-											<span class="price">${{value.precio}}</span>
-										</div>
-									</div>
-									<div class="one-eight text-center">
-										<div class="display-tc">
-											<div class="row">	
-												<a href="{% url 'carro:restar' value.producto_id %}" class="btn btn-sm">-</a>
-													<div class="col">
-			
-															<p>{{value.cantidad}}</p>
-														
-													</div>
-												
-												<a href="{% url 'carro:agregar' value.producto_id %}" class="btn btn-sm">+</a>
-											</div>
-										</div>
-									</div>
-									<div class="one-eight text-center">
-										<div class="display-tc">
-											<span class="price">${{value.precio2}}</span>
-										</div>
-									</div>
-									<div class="one-eight text-center">
-										<div class="display-tc">
-											<a href="#" class="closed"></a>
-										</div>
-									</div>
-								</div>
-								{% endfor %}
-
-							{% else %}
-							<div class="col-md-12">
-								<tr>
-									<td colspan="12">
-										<div class="alert alert-danger text-center">
-											Sin Productos
-										</div>
-									</td>
-								</tr>
-							</div>
-							{% endif %}
-            </div>
-            <div class="row row-pb-lg">
-                <div class="col-md-12">
-                    <div class="total-wrap">
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <form action="#">
-                                    <div class="row form-group">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-sm-4 text-center">
-                                <div class="total">
-                                    <div class="col-md-12 col-lg-12">
-                                        <div class="order-box">
-                                            <hr class="my-1">
-                                            <div class="d-flex">
-                                                <p><span>Subtotal:</span> <span>${{importe_total_carro}}</span></p>
-                                            </div>
-                                            <div class="d-flex">
-                                                <p><span>Costo de envio:</span> <span>$0.00</span></p>
-                                            </div>
-                                            <hr>
-                                            <div class="grand-total">
-                                                <p><span><strong>Total:{{ valor }}</strong></span> <span>$0</span></p>
-                                            </div>
-                                                #boton
-                                            </div>
-                                    </div>
-                                </div>
-                            </div>
+                                {% endfor %}
+                            </tbody>          
+                    </table>
+                    {% else %}
+                    <thead>
+                        <div class="alert alert-danger text-center">
+                            Sin Productos
                         </div>
-                    </div>
+                    </thead>
+                    {% endif %}
                 </div>
-    </div>
-
+            </div>
+        </div>
+    
+        <div class="row my-5">
+            <div class="col-lg-7 col-sm-12"></div>
+            <div class="col-lg-12 col-sm-12">
+                <div class="order-box">
+                    <h3>Suma del carrito</h3>
+                    <div class="d-flex">
+                        <h4>Sub Total</h4>
+                        <div class="ml-auto font-weight-bold">${{importe_total_carro}}</div>
+                    </div>
+                    <div class="d-flex">
+                        <h4>Descuento</h4>
+                        <div class="ml-auto font-weight-bold">${{descuento|floatformat:"2"}}</div>
+                    </div>
+                    <hr class="my-1">
+                    <div class="d-flex gr-total">
+                        <h5>Total</h5>
+                        <div class="ml-auto h5">${{totaldes}}</div>
+                    </div>
+                    <div class="d-flex gr-total">
+                        <h5>Total en dolares</h5>
+                        <div class="ml-auto h5">${{dolar}}</div>
+                    </div>
+                    <hr> </div>
+            </div>
+            {% if user.is_authenticated and importe_total_carro > 0%}
+                <div class="col-12 d-flex shopping-box"><a href="{% url 'checkout' %}" class="ml-auto btn hvr-hover">Confirmacion de pago</a></div>
+            {% elif importe_total_carro == 0 %}
+                <div class="col-12 d-flex shopping-box"><a href="{% url 'index' %}" class="ml-auto btn hvr-hover">Regresar al Inicio</a></div>
+			{% else %}
+                <div class="col-12 d-flex shopping-box"><a href="{% url 'index' %}" class="ml-auto btn hvr-hover">Regesar al inicio</a></div>
+			{% endif %}
         </div>
     </div>
-    <!-- End Cart -->
+</div>
 
 
     {% endblock %}
-    {% block js %}
-        <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-        <script>
-          paypal.Button.render({
-            env: 'sandbox',
-            client: {
-                sandbox: 'Afkl4-gUYgFYYyRADItq-Ed5k26u51koPZJ-gEj_JQ0Eh7spquxj5TjlcyyEPkKtK1s3fvb9UPVpG6nH'
-                production: 'demo_production_client_id'
-            },
-                locale: 'es_CL'
-                style: {
-                    size: 'small',
-                    color: 'black',
-                    shape: 'pill'
-                },
-                commit: true,
-                payment: function (data, actions){
-                    return actions.payment.create({
-
-                    transactions [{
-                        amount{ //#(peso chileno)90000/(dolar)811 {division}
-                            total: {{ valor }}, // #total carrito de compras
-                            currency: 'USD'
-                        }
-                    }]
-                });
-
-            },
-            onAuthorize: function(data, actions){
-                return actions.payment.execute().then(function() {
-                    // logica de lo que pasa luego del pago
-
-                    // colocar sweet altert 
-                    swal({
-                        title: "Deseas realizar el pago?",
-                        text: "El pago se completara al precionar aceptar",
-                        type: "primary",
-                        showCancelButton: true,
-                        confirmButtonClass: "btn-primary",
-                        confirmButtonText: "Aceptar",
-                        closeOnConfirm: false
-                      },
-                      function(){
-                        swal("Pago Completado!", "Su pago fue realizado correctamente", "success");
-                      });
-
-                });
-
-            },
-
-            onCancel: (data) {
-                swal({
-                    title: "Are you sure?",
-                    text: "Your will not be able to recover this imaginary file!",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonClass: "btn-danger",
-                    confirmButtonText: "Yes, delete it!",
-                    closeOnConfirm: false
-                  },
-                  function(){
-                    swal("Deleted!", "Your imaginary file has been deleted.", "success");
-                  });
-
-            },
-            onError: (err) {
-                //Sweet alter
-
-            },
-
-
-            },'#btnPaypal');
-            
-        </script>
-
-    {% endblock %}
+    

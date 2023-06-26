@@ -1,0 +1,115 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+
+<!-- Start All Title Box -->
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Mis Productos</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+                    <li class="breadcrumb-item active"> Productos </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
+
+<div class="shop-box-inner">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
+                <div class="right-product-box">
+                    <div class="product-item-filter row">
+                        <div class="col-8 col-sm-7 text-center text-sm-left">
+                            <p>Productos</p>
+                        </div>
+                        <div class="col-12 col-sm-4 text-center text-sm-right">
+                            <ul class="nav nav-tabs ml-auto">
+                                <li>
+                                    <a class="nav-link active" href="#grid-view" data-toggle="tab"> <i class="fa fa-th"></i> </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="product-categorie-box">
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
+                                <div class="row">
+                                    {% for aux in listaProductos %}
+                                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                        <div class="products-single fix">
+                                            <div class="box-img-hover">
+                                                <img src="{{ aux.imagen.url }}" class="img-fluid" alt="Image">
+                                                <div class="mask-icon">
+                                                    <ul>
+                                                        <li><a href="{% url 'productdetail' aux.id %}" data-toggle="tooltip" data-placement="right" title="Detalle"><i class="fas fa-eye"></i></a></li>
+                                                        <li><a href="{% url 'wishlist' %}" data-toggle="tooltip" data-placement="right" title="Añadir a wishlist"><i class="far fa-heart"></i></a></li>
+                                                        {% if user.is_superuser %}
+                                                        <li><a href="{% url 'update' aux.id %}" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fas fa-pen"></i></a></li>
+                                                        <li><a href="{% url 'delete' aux.id %}" data-toggle="tooltip" data-placement="right" title="Eliminar"><i class="fas fa-trash"></i></a></li>
+                                                        {% endif %}
+                                                    </ul>
+                                                    <a class="cart" href="{% url 'carro:agregar' aux.id %}">Añadir al carrito</a>
+                                                </div>
+                                            </div>
+                                            <div class="why-text">
+                                                <h4>{{ aux.nombre }}</h4>
+                                                <h5>${{ aux.precio }}</h5>
+                                                {% if aux.stock > 0 %}
+                                                <h5>Disponible: {{ aux.stock }}</h5>
+                                                {% else %}
+                                                <h5>Disponible: Sin Stock</h5>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% include 'core/paginator.html' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
+                <div class="product-categori">
+                    <div class="search-product">
+                        <form action="#">
+                            <input class="form-control" placeholder="Busca aqui.." type="text">
+                            <button type="submit"> <i class="fa fa-search"></i> </button>
+                        </form>
+                    </div>
+                    <div class="filter-sidebar-left">
+                        <div class="title-left">
+                            <h3>Descuentos</h3>
+                        </div>
+                        <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
+                            <p>15% de descuento para usuarios subscriptores</p>
+                            <a class="btn hvr-hover" href="{% url 'about' %}" readonly style="border:0; color:#FFFFFF; font-weight:bold;">Subscribete ahora!!</a>
+                        </div>
+                    </div>
+                    <div class="filter-price-left">
+                        <div class="price-box-slider">
+                            <div id="slider-range"></div>
+                            <p>
+                                <input type="text" id="amount" readonly style="border:0; color:#fbb714; font-weight:bold;">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Shop Page -->
+
+                            
+{% endblock %}
