@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% load crispy_forms_tags %}
+
 {% block contenido %}
 
  <!-- Start All Title Box -->
@@ -11,7 +13,7 @@
             <div class="col-lg-12">
                 <h2>Subscripcion</h2>
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'about' %}">Donacion</a></li>
                     <li class="breadcrumb-item active"> Subscripcion </li>
                 </ul>
             </div>
@@ -20,4 +22,115 @@
 </div>
 <!-- End All Title Box -->
 
+    <div class="container">
+        <div class="row">
+            <div class="col-12 m-5">
+                <form method="POST" enctype="multipart/form-data" id="form">
+                    {% csrf_token %}
+                    <table>
+                        {{ form | crispy}}
+                    </table>
+                    <div class="col-sm-12 text-center">
+                        <div id = "btnPaypal"></div>
+                    </div>
+                </form>
+                <br><br><br>
+            </div>
+        </div>
+    </div>
+
+ 
+
+{% endblock %}
+
+
+
+{% block js %}
+
+
+
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+
+<script>
+    function validarFormulario() {
+    var formulario = document.getElementById('form'); // ID del formulario
+
+    if (formulario.checkValidity()) {
+        
+        return true;
+    } else {
+        // El formulario no es válido
+        formulario.reportValidity(); // Muestra los mensajes de validación nativos del navegador
+        return false;
+    }
+    }
+</script>
+
+
+<script>
+    paypal.Button.render({
+        env: 'sandbox',
+        client: {
+            sandbox: 'ARK6lBHM4GXi3QzOEpnjWLXzFuTfKza_MZVok5HrxCevuxpkgXZQJKN3Ucc4z_2YSprGd2HsMiAmIsDW',
+            production: 'demo_production_client_id'
+        },
+        locale: 'es_CL',
+        style: {
+            size: 'large',
+            color: 'gold',
+            shape: 'rect'
+        },
+        commit: true,
+        
+    payment: function (data, actions) {
+        if (validarFormulario()) {
+            var monto = document.getElementById("id_Monto").value;
+
+            return actions.payment.create({
+                transactions: [{
+                    amount: { 
+                        total: monto, // EL TOTAL DEL CARRITO DE COMPRA
+                        currency: 'USD'
+                    }   
+                }]
+            });
+        
+        } 
+    },
+        onAuthorize: function (data, actions) {
+            return actions.payment.execute().then(function () {
+                // LA LOGICA DE LO QUE PASA LUEGO DEL PAGO
+
+                var url = "{% url 'suscribir' user.id %}"
+                window.location.href = url;
+            });
+        },
+        onCancel(data) {
+            Swal.fire({
+                    title: 'Cancelado',
+                    text: 'Transacción cancelada!',
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Confirmar'
+                })
+        },
+        onError(err) {
+            Swal.fire({
+                    title: 'Error',
+                    text: 'Ha ocurrido un error con el pago',
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Confirmar'
+                })
+        }
+        
+        
+
+    }, '#btnPaypal');
+</script>
 {% endblock %}

@@ -19,12 +19,11 @@ def procesar_pedido(request):
             cantidad = value["cantidad"],
             user = request.user,
             pedido = pedido
-
         ))
-
     LineaPedido.objects.bulk_create(lineas_pedido)
 
     carro=Carro(request)
     carro.limpiar_carro()
+
     return redirect("ordercomplete")
 

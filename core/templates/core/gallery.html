@@ -4,18 +4,11 @@
 
 {% block contenido %}
 
-    <!-- Start Top Search -->
-    <div class="top-search">
-        <div class="container">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
-            </div>
-        </div>
-    </div>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
     
-    <div class="all-title-box">
+<div class="all-title-box">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -29,10 +22,50 @@
         </div>
     </div>
 
+    <div class="wishlist-box-main">
+        <div class="container">
+            <div class="row">    
+                <div class="col-lg-12">
+                    <div class="table-main table-responsive">
+                        <table class="table" id="tablaUsuarios">
+                            <thead>
+                                <tr>
+                                    <th>Id Pedido</th>
+                                    <th>Usuario</th>
+                                    <th>Fecha</th>
+                                    <th>Detalle</th>
+                                </tr>
+                            </thead>
+                            {% for aux in LineaPedido %}
+                                {% if aux.user_id == user.id %}
+                                <tbody>
+                                    <tr>
+                                        <td>{{aux.id}}</td>
+                                        <td>{{aux.user}}</td>
+                                        <td>{{aux.create_at|date:'Y-m-d'}}</td>
+                                        <td><a href="{% url 'detallepedido' aux.id%}">Detalle</a></td>
+                                    </tr>
+                                </tbody>
+                                {% endif %}
+                            {% endfor %}
+                        </table>    
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
+                        <div class="product-categori">
+                            <div class="filter-sidebar-left">
+                                <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </div>
     
-    
-
-    <!-- End Gallery  -->
-
   
     {% endblock %}

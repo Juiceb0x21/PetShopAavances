@@ -9,6 +9,7 @@ from rest_framework import viewsets
 from .serializers import *
 import requests
 from django.contrib.auth.decorators import login_required, user_passes_test
+from pedidos.models import *
 from django.shortcuts import get_object_or_404
 from django.db.models.signals import post_save
 from django.dispatch import receiver    
@@ -23,6 +24,14 @@ class TipoProductoViewset(viewsets.ModelViewSet):
     queryset = TipoProducto.objects.all()
     serializer_class = TipoProductoSerializers
 
+#funcion generica que valida el grup
+def grupo_requerido(nombre_grupo):
+    def decorator (view_func):
+        @user_passes_test(lambda user: user.groups.filter(name='nombre_grupo').exists())
+        def wrapper(requests, *args, **kwargs):
+            return view_func(requests, *args, **kwargs)
+        return wrapper
+    return decorator
 
 # Create your views here.
 def index(request):
@@ -62,8 +71,13 @@ def indexapi(request):
 
     return render(request, 'core/indexapi.html', data)
 
+@login_required
 def wishlist(request):
     return render(request, 'core/wishlist.html')
+
+@login_required
+def usuario(request):
+    return render(request, 'core/usuario.html')
 
 def productos(request):
     productosAll = Producto.objects.all()
@@ -82,11 +96,10 @@ def productos(request):
     return render(request, 'core/productos.html', data)
 
 def about(request):
+
+
     return render(request, 'core/about.html')
 
-@login_required
-def subscripcion(request):
-    return render(request, 'core/subscripcion.html')
 
 @login_required
 def cart(request):
@@ -104,14 +117,38 @@ def cart(request):
 
     return render(request, 'core/cart.html')
 
+def historial(request):
+    LineaPedido = LineaPedido.objects.all()
+    data = {
+        'LineaPedido' : LineaPedido
+    }
+    return render(request, 'core/gallery.html',data)
+
 def contactus(request):
     return render(request, 'core/contact-us.html')
 
+@login_required
 def agregar(request):
     return render(request, 'core/agregar.html')
 
+@login_required
 def gallery(request):
-    return render(request, 'core/gallery.html')
+    pedido = Pedido.objects.all()
+    data = {
+        'LineaPedido' : pedido,     
+    }
+    return render(request, 'core/gallery.html', data)
+
+def detallepedido(request, id):
+    pedido = Pedido.objects.get(id = id)
+    lineapedido = LineaPedido.objects.filter(pedido=id)
+
+    data = {
+        'pedido': pedido,
+        'lineapedido': lineapedido
+    }
+
+    return render(request, 'core/detallepedido.html', data)
 
 @login_required
 def myaccount(request):
@@ -120,26 +157,24 @@ def myaccount(request):
 def shop(request):
     return render(request, 'core/shop.html')
 
+@login_required
 def ordercomplete(request):
     return render(request, 'core/order-complete.html')
 
 def checkout(request):
     data = {
-        'form' : DireccionForm()
+        'form' : CheckoutForm()
     }       
 
     if request.method == 'POST':
-        formulario = DireccionForm(request.POST)
+        formulario = CheckoutForm(request.POST)
         if formulario.is_valid():
             Nombre = formulario.cleaned_data['Nombre']
             Apellido = formulario.cleaned_data['Apellido']
-            Ciudad = formulario.cleaned_data['Ciudad']
-            Comuna = formulario.cleaned_data['Comuna']
             Direccion = formulario.cleaned_data['Direccion']
             Email = formulario.cleaned_data['Email']
 
     return render(request, 'core/checkout.html', data)
-
 
 def productdetail(request, id):
     productosAll = Producto.objects.get(id=id)
@@ -186,3 +221,38 @@ def delete(requests,id):
     
     return redirect(to = "index")
 
+def agregar_suscriptor(request, id):
+    usuario = User.objects.get(id=id)
+    usuario.groups.add(4)
+    usuario.save()
+    return redirect('status')
+
+@login_required
+def subscripcion(request):
+    data = {
+        'form' : DonacionForm()
+    } 
+    if request.method == 'POST':
+        formulario = DonacionForm(request.POST)
+        if formulario.is_valid():
+            Nombre = formulario.cleaned_data['Nombre']
+            Email = formulario.cleaned_data['Email']
+            Monto = formulario.cleaned_data['Monto']
+        
+    return render(request, 'core/subscripcion.html', data)
+
+@login_required
+def status(request):
+    user = User.objects.get(id=request.user.id)
+    usuario = user.groups.filter(name='subscriptor').exists()
+    data = {
+        'usuario' : usuario
+    }
+    return render(request, 'core/status.html', data )
+
+def quitar_usuario_de_grupo(request, id):
+
+    usuario = User.objects.get(id=id)
+    grupo = Group.objects.get(id=1)
+    usuario.groups.remove(4)
+    return redirect('status')

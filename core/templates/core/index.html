@@ -4,16 +4,6 @@
 
     {% block contenido %}
     
-    <div class="top-search">
-        <div class="container">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
-            </div>
-        </div>
-    </div>
-
     <!-- Start Slider -->
     <div id="slides-shop" class="cover-slides">
         <ul class="slides-container">
@@ -23,8 +13,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h1 class="m-b-20"><strong>Bienvenidos a <br> PetShop</strong></h1>
-                            <p class="m-b-25">"¡Bienvenido a nuestra tienda de mascotas, donde los peludos son nuestra pasión! Encuentra todo lo que necesitas para consentir a tu fiel compañero." <br> ellos aprecian mucho tu ayuda!</p>
-                            <p><a class="btn hvr-hover" href="{% url 'subscripcion' %}">Subscribete ahora!!</a></p>
+                            <p class="m-b-25">"¡Bienvenido a nuestra tienda de mascotas, donde los peludos son nuestra pasión! Encuentra todo lo que necesitas para consentir a tu fiel compañero." </p>
+                            <p><a class="btn hvr-hover" href="{% url 'about' %}">Subscribete ahora!!</a></p>
                         </div>
                     </div>
                 </div>
@@ -36,7 +26,7 @@
                         <div class="col-md-12">
                             <h1 class="m-b-20"><strong>Bienvenidos a <br> PetShop</strong></h1>
                             <p class="m-b-40">"¡Bienvenido a nuestra tienda de mascotas, donde los peludos son nuestra pasión! Encuentra todo lo que necesitas para consentir a tu fiel compañero."</p>
-                            <p><a class="btn hvr-hover" href="{% url 'subscripcion' %}">Subscribete ahora!!</a></p>
+                            <p><a class="btn hvr-hover" href="{% url 'about' %}">Subscribete ahora!!</a></p>
                         </div>
                     </div>
                 </div>
@@ -47,8 +37,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h1 class="m-b-20"><strong>Bienvenidos a <br> PetShop</strong></h1>
-                            <p class="m-b-40">"¡Bienvenido a nuestra tienda de mascotas, donde los peludos son nuestra pasión! Encuentra todo lo que necesitas para consentir a tu fiel compañero." <br> ellos aprecian mucho tu ayuda!</p>
-                            <p><a class="btn hvr-hover" href="{% url 'subscripcion' %}">Subscribete ahora!!</a></p>
+                            <p class="m-b-40">"¡Bienvenido a nuestra tienda de mascotas, donde los peludos son nuestra pasión! Encuentra todo lo que necesitas para consentir a tu fiel compañero."</p>
+                            <p><a class="btn hvr-hover" href="{% url 'about' %}">Subscribete ahora!!</a></p>
                         </div>
                     </div>
                 </div>
@@ -82,8 +72,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="title-all text-center">
-                        <h1>Productos mas vendidos</h1>
-                        <p>Aqui encontraras nuestros productos mas vendidos</p>
+                        <h1>Resumen</h1>
+                        <p>Aqui encontraras un resumen de todos nuestros productos.</p>
                     </div>
                 </div>
             </div>
@@ -125,11 +115,10 @@
                             <h5>Disponible: Sin Stock</h5>
                             {% endif %}    
                         </div>
-                    </div>  
-                </div>  
+                    </div> 
+                </div>
                 {% endfor %}
             </div>
-            {% include 'core/paginator.html' %}
         </div>
         
     </div>

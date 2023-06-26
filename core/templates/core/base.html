@@ -28,6 +28,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'core/css/custom.css' %}">
 
+    <link rel="stylesheet" href="{% static 'core/css/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' %}">
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js' %}"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js' %}/1.4.2/respond.min.js' %}"></script>
@@ -79,7 +80,6 @@
                         <li class="nav-item active"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'productos' %}">productos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'gallery' %}">Mis Pedidos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'subscripcion' %}">Subscribirse</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">Donar</a></li>
                         {% if user.is_superuser %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'product' %}">Agregar</a></li>
@@ -91,8 +91,7 @@
                     <li class="side-menu">
 						<a href="{% url 'cart' %}">
 							<i class="fa fa-shopping-bag"></i>
-							<span class="badge">{{value.cantidad}}</span>
-								
+							<span class="badge">{{cantidad_carro}}</span>		
 						</a>
 					</li>
                 </ul>
@@ -106,13 +105,13 @@
 
     <footer>
         <div class="footer-main">
-            <div class="container-fluid">
+            <div class="container">
 				<div class="row">
 					<div class="col-lg-4 col-md-12 col-sm-12">
 						<div class="footer-top-box">
 							<h3>Tiempo Abierto</h3>
 							<ul class="list-time">
-								<li>Lunes - Viernes: 08.00am hasta 05:00pm</li> <li>Sabado: 10:00am hasta 08:00pm</li> <li>Domingo: <span>Cerrado</span></li>
+								<li>Lunes - Viernes: 08:00am hasta 05:00pm</li> <li>Sabado: 10:00am hasta 08:00pm</li> <li>Domingo: <span>Cerrado</span></li>
 							</ul>
 						</div>
 					</div>
@@ -129,7 +128,7 @@
 							</form>
 						</div>
 					</div>
-				
+				</div>
 				<hr>
                 <div class="row">
                     <div class="col-lg-4 col-md-12 col-sm-12">
@@ -179,9 +178,7 @@
             <a>Alex Oliva, Isaias Gatica y Alex Pavez</a></p>
     </div>
     <!-- End copyright  -->
-
     <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
-
     {% block js %}
     <!-- ALL JS FILES -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

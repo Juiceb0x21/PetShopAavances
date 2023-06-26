@@ -104,17 +104,16 @@
                     </div>
                     <div class="d-flex">
                         <h4>Descuento</h4>
-                        <div class="ml-auto font-weight-bold">$0</div>
+                        <div class="ml-auto font-weight-bold">${{descuento|floatformat:"2"}}</div>
                     </div>
                     <hr class="my-1">
-                    <div class="d-flex">
-                        <h4>Costo de envio</h4>
-                        <div class="ml-auto font-weight-bold">Gratis</div>
-                    </div>
-                    <hr>
                     <div class="d-flex gr-total">
                         <h5>Total</h5>
-                        <div class="ml-auto h5">${{importe_total_carro}}</div>
+                        <div class="ml-auto h5">${{totaldes}}</div>
+                    </div>
+                    <div class="d-flex gr-total">
+                        <h5>Total en dolares</h5>
+                        <div class="ml-auto h5">${{dolar}}</div>
                     </div>
                     <hr> </div>
             </div>

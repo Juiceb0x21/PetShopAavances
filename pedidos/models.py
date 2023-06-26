@@ -1,6 +1,6 @@
 from django.db import models
 
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 
 from core.models import Producto
 
@@ -9,11 +9,17 @@ from django.db.models import F, Sum, FloatField
 from datetime import datetime
 # Create your models here.
 
-User = get_user_model()
-
 class Pedido(models.Model):
+    ESTADO_CHOICES = (
+        ('Pendiente', 'Pendiente'),
+        ('En proceso', 'En proceso'),
+        ('Completado', 'Completado'),
+        ('Cancelado', 'Cancelado'),
+    )
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at=models.DateTimeField(default=datetime.now)
+    created_at = models.DateTimeField(default=datetime.now) 
+    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='pendiente')
 
     def __str__(self):
         return str(self.id)
@@ -23,11 +29,12 @@ class Pedido(models.Model):
         return self.lineapedido_set.aggregate(
             total=Sum(F("precio")*F("cantidad"), output_field=FloatField())
         )["total"]
-    class meta:
-        db_table='pedidos'
-        verbose_name='pedido'
-        verbose_name_plural='pedidos'
-        ordering=['id']
+    
+    class Meta:
+        db_table = 'pedidos'
+        verbose_name = 'pedido'
+        verbose_name_plural = 'pedidos'
+        ordering = ['id']
 
 class LineaPedido(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

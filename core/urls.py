@@ -29,14 +29,18 @@ urlpatterns = [
         path('productdetail/<id>/', productdetail, name="productdetail"),
         path('cart/', cart, name='cart'),
         path('productos/', productos, name='productos'),
-
+        path('usuario/', usuario, name='usuario'),
+        path('status/', status, name='status'),
+        path('detallepedido/<id>/', detallepedido, name="detallepedido"),
+        
 
         path('product/', product, name="product"),
         path('update/<id>/', update, name="update"),
         path('delete/<id>/', delete, name="delete"),
+    
 
-        
-
+        path('suscribir/<id>/', agregar_suscriptor, name="suscribir"),
+        path('quitar-usuario/<id>/', quitar_usuario_de_grupo, name='quitar_usuario_de_grupo'),
     ]
 
     
