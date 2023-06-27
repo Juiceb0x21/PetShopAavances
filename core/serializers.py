@@ -12,3 +12,6 @@ class ProductoSerializers(serializers.ModelSerializer):
         model = Producto
         fields = '__all__'
 
+
+
+

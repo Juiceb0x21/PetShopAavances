@@ -50,7 +50,6 @@
                                                 <div class="mask-icon">
                                                     <ul>
                                                         <li><a href="{% url 'productdetail' aux.id %}" data-toggle="tooltip" data-placement="right" title="Detalle"><i class="fas fa-eye"></i></a></li>
-                                                        <li><a href="{% url 'wishlist' %}" data-toggle="tooltip" data-placement="right" title="Añadir a wishlist"><i class="far fa-heart"></i></a></li>
                                                         {% if user.is_superuser %}
                                                         <li><a href="{% url 'update' aux.id %}" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fas fa-pen"></i></a></li>
                                                         <li><a href="{% url 'delete' aux.id %}" data-toggle="tooltip" data-placement="right" title="Eliminar"><i class="fas fa-trash"></i></a></li>
@@ -91,7 +90,7 @@
                             <h3>Descuentos</h3>
                         </div>
                         <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
-                            <p>15% de descuento para usuarios subscriptores</p>
+                            <p>5% de descuento para usuarios subscriptores</p>
                             <a class="btn hvr-hover" href="{% url 'about' %}" readonly style="border:0; color:#FFFFFF; font-weight:bold;">Subscribete ahora!!</a>
                         </div>
                     </div>
