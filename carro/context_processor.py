@@ -17,7 +17,7 @@ def importe_total_carro(request):
         total=total+(int(value["precio"])*value["cantidad"])
         
     if  usuario == True:
-        descuento = (total*0.15)
+        descuento = (total*0.05)
         totaldes = int(total-descuento)
         dolar = round( (totaldes / monedas["dolar"]["valor"]), 2)
     else:

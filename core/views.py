@@ -24,8 +24,8 @@ class TipoProductoViewset(viewsets.ModelViewSet):
     queryset = TipoProducto.objects.all()
     serializer_class = TipoProductoSerializers
 
-
 #funcion generica que valida el grup
+
 def grupo_requerido(nombre_grupo):
     def decorator (view_func):
         @user_passes_test(lambda user: user.groups.filter(name='nombre_grupo').exists())
@@ -257,9 +257,3 @@ def quitar_usuario_de_grupo(request, id):
     grupo = Group.objects.get(id=1)
     usuario.groups.remove(4)
     return redirect('status')
-
-def agregar_vendedor(request, id):
-    usuario = User.objects.get(id=id)
-    usuario.groups.add(2)
-    usuario.save()
-    return redirect('index')
