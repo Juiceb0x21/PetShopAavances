@@ -60,7 +60,7 @@
                                     <td class="name-pr">
                                         <a href="#">
                                     {{value.nombre}}
-                                </a>
+                                        </a>
                                     </td>
                                     <td class="precio-pr">
                                         {% if value.cantidad < 2 %}
@@ -71,6 +71,7 @@
                                     </td>
                                     <td class="quantity-box">
                                         <a href="{% url 'carro:restar' value.producto_id %}" class="btn btn-sm">-</a>
+                                        {{value.cantidad}}
                                         <a href="{% url 'carro:agregar' value.producto_id %}" class="btn btn-sm">+</a>
                                     </td>
                                     <td class="remove-pr">
