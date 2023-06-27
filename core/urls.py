@@ -40,6 +40,7 @@ urlpatterns = [
     
 
         path('suscribir/<id>/', agregar_suscriptor, name="suscribir"),
+        path('suscribir/<id>/', agregar_vendedor, name="suscribir"),
         path('quitar-usuario/<id>/', quitar_usuario_de_grupo, name='quitar_usuario_de_grupo'),
     ]
 

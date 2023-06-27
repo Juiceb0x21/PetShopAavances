@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2023 at 12:54 AM
+-- Generation Time: Jun 26, 2023 at 05:03 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -112,9 +112,9 @@ CREATE TABLE `auth_group` (
 
 INSERT INTO `auth_group` (`id`, `name`) VALUES
 (3, 'administradores'),
-(2, 'cliente'),
-(4, 'Suscriptor'),
-(1, 'Vendedor');
+(1, 'cliente'),
+(4, 'subscriptor'),
+(2, 'vendedor');
 
 -- --------------------------------------------------------
 
@@ -133,15 +133,15 @@ CREATE TABLE `auth_group_permissions` (
 --
 
 INSERT INTO `auth_group_permissions` (`id`, `group_id`, `permission_id`) VALUES
-(6, 1, 29),
-(7, 1, 30),
-(8, 1, 31),
-(1, 1, 32),
-(2, 1, 37),
-(3, 1, 38),
-(4, 1, 39),
-(5, 1, 40),
-(9, 2, 36),
+(1, 1, 36),
+(7, 2, 29),
+(8, 2, 30),
+(9, 2, 31),
+(2, 2, 32),
+(3, 2, 33),
+(4, 2, 34),
+(5, 2, 35),
+(6, 2, 36),
 (10, 3, 1),
 (11, 3, 2),
 (12, 3, 3),
@@ -186,11 +186,7 @@ INSERT INTO `auth_group_permissions` (`id`, `group_id`, `permission_id`) VALUES
 (51, 3, 42),
 (52, 3, 43),
 (53, 3, 44),
-(54, 3, 45),
-(55, 3, 46),
-(56, 3, 47),
-(57, 3, 48),
-(58, 4, 40);
+(54, 4, 36);
 
 -- --------------------------------------------------------
 
@@ -246,22 +242,14 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (34, 'Can change producto', 9, 'change_producto'),
 (35, 'Can delete producto', 9, 'delete_producto'),
 (36, 'Can view producto', 9, 'view_producto'),
-(37, 'Can add productos', 10, 'add_productos'),
-(38, 'Can change productos', 10, 'change_productos'),
-(39, 'Can delete productos', 10, 'delete_productos'),
-(40, 'Can view productos', 10, 'view_productos'),
-(41, 'Can add linea pedido', 11, 'add_lineapedido'),
-(42, 'Can change linea pedido', 11, 'change_lineapedido'),
-(43, 'Can delete linea pedido', 11, 'delete_lineapedido'),
-(44, 'Can view linea pedido', 11, 'view_lineapedido'),
-(45, 'Can add pedido', 12, 'add_pedido'),
-(46, 'Can change pedido', 12, 'change_pedido'),
-(47, 'Can delete pedido', 12, 'delete_pedido'),
-(48, 'Can view pedido', 12, 'view_pedido'),
-(49, 'Can add tipo seguimiento', 13, 'add_tiposeguimiento'),
-(50, 'Can change tipo seguimiento', 13, 'change_tiposeguimiento'),
-(51, 'Can delete tipo seguimiento', 13, 'delete_tiposeguimiento'),
-(52, 'Can view tipo seguimiento', 13, 'view_tiposeguimiento');
+(37, 'Can add linea pedido', 10, 'add_lineapedido'),
+(38, 'Can change linea pedido', 10, 'change_lineapedido'),
+(39, 'Can delete linea pedido', 10, 'delete_lineapedido'),
+(40, 'Can view linea pedido', 10, 'view_lineapedido'),
+(41, 'Can add pedido', 11, 'add_pedido'),
+(42, 'Can change pedido', 11, 'change_pedido'),
+(43, 'Can delete pedido', 11, 'delete_pedido'),
+(44, 'Can view pedido', 11, 'view_pedido');
 
 -- --------------------------------------------------------
 
@@ -288,8 +276,7 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$216000$NaxboLfEhI3X$vC/EXLW548rhl0KwHtETsCSwsZCkaRNhH6t93WGoOhU=', '2023-06-24 22:06:20.169064', 1, 'alex', '', '', 'al.pavezf@duocuc.cl', 1, 1, '2023-06-06 13:22:15.172069'),
-(8, 'pbkdf2_sha256$216000$wUDb3KjPRoI4$gtlzFRIIdGPn0kQ3CryPIaxbn958oVmHS1PpYu3VLIo=', '2023-06-24 22:02:59.480134', 0, 'manuelsoto', '', '', 'manuelsoto@gmail.com', 0, 1, '2023-06-23 04:43:20.833050');
+(1, 'pbkdf2_sha256$216000$NaxboLfEhI3X$vC/EXLW548rhl0KwHtETsCSwsZCkaRNhH6t93WGoOhU=', '2023-06-26 01:44:16.472269', 1, 'alex', '', '', 'al.pavezf@duocuc.cl', 1, 1, '2023-06-06 13:22:15.172069');
 
 -- --------------------------------------------------------
 
@@ -308,10 +295,7 @@ CREATE TABLE `auth_user_groups` (
 --
 
 INSERT INTO `auth_user_groups` (`id`, `user_id`, `group_id`) VALUES
-(5, 1, 1),
-(11, 1, 4),
-(7, 8, 2),
-(12, 8, 4);
+(1, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -346,8 +330,15 @@ CREATE TABLE `core_producto` (
 --
 
 INSERT INTO `core_producto` (`id`, `nombre`, `precio`, `stock`, `imagen`, `tipo_id`, `descripcion`) VALUES
-(3, 'Correa para perro', 8, 2, 'correa_larga_de_entrenamiento_1_uIkLDbf.jpg', 1, 'Correa para perro'),
-(4, 'Correa para perro de cuero', 20000, 17, 'Mejores-correas-para-perros-rantow-amazon.jpg', 1, 'Correa para perro de cuero');
+(1, 'Correa para perro', 15000, 11, 'correa_larga_de_entrenamiento_1.jpg', 5, 'Correa para perro'),
+(2, 'Jaula para animales', 16000, 19, 'S01140100V_1.jpg', 2, 'Una jaula qe permite mover a tu animalito por distintos lugares, tanto gato, perro, etc...'),
+(3, 'Cama para perro', 52990, 53, 'CAMA-BEIGE.jpg', 3, 'Cama comoda de tamaño mediano para tu animalito de casa'),
+(4, 'Rascador para gato', 17890, 15, 'rascador-tubo-con-juguete-para-gatos.jpg', 4, 'Rascador para gatos de tamaño pequeño.'),
+(5, 'Juguete para perro', 7000, 23, 'goma.jpg', 1, 'Juguete para perro con forma de huesito'),
+(6, 'Cama para gato', 23000, 32, 'gato.jpg', 3, 'Cama para gato de tamaño mediano.'),
+(7, 'Correa para gato', 12000, 23, '4126.jpg', 4, 'Correa para gato de color rosa'),
+(8, 'Cama para perro', 20000, 12, 'cama.jpg', 3, 'Cama para perro de tamaño grande'),
+(9, 'varilla para gato', 10000, 10, 'vara.jpg', 4, 'Juguete de varilla de 16cm para gato');
 
 -- --------------------------------------------------------
 
@@ -365,7 +356,11 @@ CREATE TABLE `core_tipoproducto` (
 --
 
 INSERT INTO `core_tipoproducto` (`id`, `descripcion`) VALUES
-(1, 'objetos para perro');
+(1, 'objetos para perro'),
+(2, 'jaulas para animales'),
+(3, 'camas para animales'),
+(4, 'objetos para gato'),
+(5, 'accesorios para animales');
 
 -- --------------------------------------------------------
 
@@ -391,48 +386,14 @@ CREATE TABLE `django_admin_log` (
 INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`, `action_flag`, `change_message`, `content_type_id`, `user_id`) VALUES
 (1, '2023-06-06 13:27:35.721466', '1', 'objetos para perro', 1, '[{\"added\": {}}]', 8, 1),
 (2, '2023-06-06 13:28:09.116803', '1', 'Correa para perro', 1, '[{\"added\": {}}]', 9, 1),
-(3, '2023-06-14 04:40:26.187951', '2', 'Ola', 1, '[{\"added\": {}}]', 9, 1),
-(4, '2023-06-14 04:40:59.631014', '1', 'Correa para perro', 3, '', 9, 1),
-(5, '2023-06-14 04:41:26.707270', '2', 'Ola', 3, '', 9, 1),
-(6, '2023-06-14 04:42:11.780722', '3', 'Correa para perro', 1, '[{\"added\": {}}]', 9, 1),
-(7, '2023-06-14 04:43:11.029883', '4', 'Correa para perro de cuero', 1, '[{\"added\": {}}]', 9, 1),
-(8, '2023-06-20 23:56:13.641665', '9', '9', 3, '', 12, 1),
-(9, '2023-06-20 23:56:13.751275', '8', '8', 3, '', 12, 1),
-(10, '2023-06-20 23:56:13.797843', '7', '7', 3, '', 12, 1),
-(11, '2023-06-20 23:56:13.902462', '6', '6', 3, '', 12, 1),
-(12, '2023-06-20 23:56:13.933703', '5', '5', 3, '', 12, 1),
-(13, '2023-06-20 23:56:13.965044', '4', '4', 3, '', 12, 1),
-(14, '2023-06-20 23:56:13.996334', '3', '3', 3, '', 12, 1),
-(15, '2023-06-20 23:56:14.042969', '2', '2', 3, '', 12, 1),
-(16, '2023-06-20 23:56:14.075409', '1', '1', 3, '', 12, 1),
-(17, '2023-06-21 00:38:16.349554', '10', '10', 3, '', 12, 1),
-(18, '2023-06-23 04:21:15.000527', '1', 'Vendedor', 1, '[{\"added\": {}}]', 4, 1),
-(19, '2023-06-23 04:22:10.924943', '2', 'cliente', 1, '[{\"added\": {}}]', 4, 1),
-(20, '2023-06-23 04:22:49.121317', '3', 'administradores', 1, '[{\"added\": {}}]', 4, 1),
-(21, '2023-06-23 04:25:38.084776', '4', 'alexp', 3, '', 5, 1),
-(22, '2023-06-23 04:25:38.147522', '5', 'alexpavez', 3, '', 5, 1),
-(23, '2023-06-23 04:25:38.178465', '6', 'alexpavez1', 3, '', 5, 1),
-(24, '2023-06-23 04:25:38.235740', '7', 'manuel soto', 3, '', 5, 1),
-(25, '2023-06-23 04:25:42.914489', '3', 'manolo7', 3, '', 5, 1),
-(26, '2023-06-23 04:38:01.265455', '4', 'Suscriptor', 1, '[{\"added\": {}}]', 4, 1),
-(27, '2023-06-24 21:05:57.557958', '25', '25', 3, '', 12, 1),
-(28, '2023-06-24 21:05:57.639678', '24', '24', 3, '', 12, 1),
-(29, '2023-06-24 21:05:57.702164', '23', '23', 3, '', 12, 1),
-(30, '2023-06-24 21:05:57.733411', '22', '22', 3, '', 12, 1),
-(31, '2023-06-24 21:05:57.797708', '21', '21', 3, '', 12, 1),
-(32, '2023-06-24 21:05:57.947521', '20', '20', 3, '', 12, 1),
-(33, '2023-06-24 21:05:57.981955', '19', '19', 3, '', 12, 1),
-(34, '2023-06-24 21:05:58.013199', '18', '18', 3, '', 12, 1),
-(35, '2023-06-24 21:05:58.106929', '17', '17', 3, '', 12, 1),
-(36, '2023-06-24 21:05:58.263087', '16', '16', 3, '', 12, 1),
-(37, '2023-06-24 21:05:58.325331', '15', '15', 3, '', 12, 1),
-(38, '2023-06-24 21:05:58.356794', '14', '14', 3, '', 12, 1),
-(39, '2023-06-24 21:05:58.388109', '13', '13', 3, '', 12, 1),
-(40, '2023-06-24 21:05:58.427103', '12', '12', 3, '', 12, 1),
-(41, '2023-06-24 21:05:58.463970', '11', '11', 3, '', 12, 1),
-(42, '2023-06-24 22:06:40.162041', '28', '28', 3, '', 12, 1),
-(43, '2023-06-24 22:06:40.222840', '27', '27', 3, '', 12, 1),
-(44, '2023-06-24 22:06:40.285403', '26', '26', 3, '', 12, 1);
+(3, '2023-06-26 01:49:20.799403', '1', 'cliente', 1, '[{\"added\": {}}]', 4, 1),
+(4, '2023-06-26 01:49:35.689279', '2', 'vendedor', 1, '[{\"added\": {}}]', 4, 1),
+(5, '2023-06-26 01:49:47.504092', '3', 'administradores', 1, '[{\"added\": {}}]', 4, 1),
+(6, '2023-06-26 01:49:59.555900', '4', 'subscriptor', 1, '[{\"added\": {}}]', 4, 1),
+(7, '2023-06-26 01:52:55.982269', '2', 'jaulas para animales', 1, '[{\"added\": {}}]', 8, 1),
+(8, '2023-06-26 01:53:03.600037', '3', 'camas para animales', 1, '[{\"added\": {}}]', 8, 1),
+(9, '2023-06-26 01:53:15.760125', '4', 'objetos para gato', 1, '[{\"added\": {}}]', 8, 1),
+(10, '2023-06-26 01:53:27.077384', '5', 'accesorios para animales', 1, '[{\"added\": {}}]', 8, 1);
 
 -- --------------------------------------------------------
 
@@ -458,11 +419,9 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (5, 'auth', 'user'),
 (6, 'contenttypes', 'contenttype'),
 (9, 'core', 'producto'),
-(10, 'core', 'productos'),
 (8, 'core', 'tipoproducto'),
-(11, 'pedidos', 'lineapedido'),
-(12, 'pedidos', 'pedido'),
-(13, 'pedidos', 'tiposeguimiento'),
+(10, 'pedidos', 'lineapedido'),
+(11, 'pedidos', 'pedido'),
 (7, 'sessions', 'session');
 
 -- --------------------------------------------------------
@@ -532,9 +491,10 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (47, 'auth', '0012_alter_user_first_name_max_length', '2023-06-06 13:16:11.595786'),
 (48, 'core', '0001_initial', '2023-06-06 13:16:11.624794'),
 (49, 'sessions', '0001_initial', '2023-06-06 13:16:11.672767'),
-(50, 'pedidos', '0001_initial', '2023-06-20 21:43:18.547415'),
-(51, 'pedidos', '0002_auto_20230620_1532', '2023-06-20 22:32:47.716868'),
-(52, 'pedidos', '0003_auto_20230624_1718', '2023-06-24 21:18:46.990333');
+(50, 'pedidos', '0001_initial', '2023-06-26 01:43:47.095146'),
+(51, 'pedidos', '0002_pedido_estado', '2023-06-26 01:46:25.027033'),
+(52, 'pedidos', '0003_lineapedido_estado', '2023-06-26 01:48:18.556289'),
+(53, 'pedidos', '0004_remove_lineapedido_estado', '2023-06-26 02:22:55.403703');
 
 -- --------------------------------------------------------
 
@@ -553,11 +513,32 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('d1e6jdmvcka0h6agnigkeao757vauy9g', '.eJxVjEEOgyAQRe8y64YwCFhcdt8zmBkYq20jCejKePfWxI3b_977G0QqJUO37TfoaV3Gfq1S-ilBBwiXjSl-ZD5AetP8yirmeSkTq0NRJ63qmZN8H6d7ORipjv-6da2kYMho0g7joA0PwbLEYJC8ZW6Ctz5FZwTFOq-xEZL2PgRG1I2F_Qd00ztI:1qBl6J:xkkmYcUAtvJDYy2QJbc9FO1rMR4X6VLrIUgzf1ntvfM', '2023-07-04 23:49:31.745148'),
-('ehmea7fbsl4igmigl4af8etqwx4gbrmr', 'eyJjYXJybyI6e319:1qDBQF:wNPlVNPvtG4J9DMulK1ZLoGHoDGidLYFI0X6yWy2NTU', '2023-07-08 22:07:59.796583'),
-('imay9hl3jh2ehcuq7r7ikcn234ghmteg', 'eyJjYXJybyI6e319:1qCvvU:QFeh4hFY06G_VZbQEi5fECDtz1DMM7aDSIlDJSMkk0A', '2023-07-08 05:35:12.839932'),
-('x0n3zqwpvccszqvvcfdwwpuknzx2lo6o', '.eJxVjs2KwzAMhF9l0Tm4tvOfY3cvhe4zGNlWEreNHZzkVPLu65Sy0MsgaWY-9ASDMQbonpAfMsdgN7MG5Sx0eQY-TDoSdPAdYiT8mjEmoaOSpTAZl7rQ_C8SuiZLTL86iwkhMnATDuRT6jSRdXgyL5J6YBxQWVLk10geJ5eGoITaLvfrj-7ZbR5g3zNQuK2j2haKr6dAwMdNo7mTPwx7Qz8EZkICOs2OCHu7C_sNlh7nd_YDMOIypnZd1mRbiZIjL4XpudR9W2gyrRRYFVrnbVVU1pSSBBVlxUVOSHXTt1oInhew_wH8Pm3m:1qD9fz:HEvr6M0U61snDHoDdb-woLftCXWwXI9mlCy9-TIDK6Y', '2023-07-08 20:16:07.863680'),
+('04ozr1rdt49q08lzq13926151guakd5s', '.eJxVjEEOgyAQRe8y64YwCFhcdt8zmBkYq20jCejKePfWxI3b_977G0QqJUO37TfoaV3Gfq1S-ilBBwiXjSl-ZD5AetP8yirmeSkTq0NRJ63qmZN8H6d7ORipjv-6da2kYMho0g7joA0PwbLEYJC8ZW6Ctz5FZwTFOq-xEZL2PgRG1I2F_Qd00ztI:1qDc1l:pp5ziX1QWZHDcrwivVbbI_MXjZyCwggEPAiI3Oa1V04', '2023-07-10 02:32:29.271497'),
+('cy6zdz644b1u7p93xwseqdi3qan8zs8e', '.eJxVkMFuwyAMhl9l4hylQEIyeuzOewZkwEnoGohIcqry7jVtNW0XC_3-_882d2Zg3yazr5hN8OzMBKv-ahbcD8bS8FeIY6pdilsOti6W-t1d6-_k8XZ5e_8BJlgnSveqR68lSA5cCTdwaQfdWnRaCuhaaxvdtZ13SqLAVnVcNAjYfw7aCsGblqAOck7sfKcVqSw5-d1t6bm1qFhMs81Ik75SzggfC2QqWCIVmdGFVK5TnPNfQVKyCIUdt-DhhQozjBjJfZrRBzi5J9HcII9gPBqkH8AIc6BHMqK-LiM7juMB6E5sfg:1q8vRD:EcslEXbScNTUBmlePYJ1dqVXdE4pIaC-ji5_cm4SQcw', '2023-06-27 04:15:23.037102'),
 ('zc7jhb6z288l1rwqdvj1a45l4a7ae47i', '.eJxVjk1ugzAQha9SzRo5tjFQWKbrnsEa2wM4DTYysIq4e-00qpTN0-j9fJoHWEwpwvAAUWRN0R12j9o7GEQFIS4mEQzwFVMi_FgxZaEyqXKZrM9bEA3n_N-QeVmMKrPD7h3-ofyCE4XcvizkPF7sk6jvmCbUjjSFPVHAxecjasFu6wTnWYHGY5_1sVF6PpX_fPMM2h8KJXA3DFNkNmaQN6xU2Cvd2Hd0dL--um-AGbc5r7umI9dLlBx5I-zIpRl7Zcj2UmCrjKn7VrXONpIEqabloiak7nPsjRC8VnD-Ap8RbH4:1q6WnN:MDlLaXyhDORcxIHCBVk8CC-9k-itn-guihK5gBqXLsM', '2023-06-20 13:32:21.657845');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pedidos`
+--
+
+CREATE TABLE `pedidos` (
+  `id` int(11) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `estado` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pedidos`
+--
+
+INSERT INTO `pedidos` (`id`, `created_at`, `user_id`, `estado`) VALUES
+(1, '2023-06-25 21:44:43.317456', 1, 'pendiente'),
+(2, '2023-06-25 21:45:37.314700', 1, 'pendiente'),
+(3, '2023-06-25 21:47:27.949006', 1, 'pendiente'),
+(4, '2023-06-25 22:14:31.248308', 1, 'pendiente');
 
 -- --------------------------------------------------------
 
@@ -571,43 +552,19 @@ CREATE TABLE `pedidos_lineapedido` (
   `created_at` datetime(6) NOT NULL,
   `pedido_id` int(11) NOT NULL,
   `producto_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `estado` varchar2(50) NOT NULL 
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
-CREATE TABLE `carro` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `producto_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL,
-  `created_at` datetime(6) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-CREATE TABLE `pedidos_pedido` (
-  `id` int(11) NOT NULL,
-  `created_at` datetime(6) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `estado` varchar2(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `pedidos_pedido`
+-- Dumping data for table `pedidos_lineapedido`
 --
 
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pedidos_tiposeguimiento`
---
-
-CREATE TABLE `pedidos_tiposeguimiento` (
-  `id` int(11) NOT NULL,
-  `seguimiento` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+INSERT INTO `pedidos_lineapedido` (`id`, `cantidad`, `created_at`, `pedido_id`, `producto_id`, `user_id`) VALUES
+(1, 1, '2023-06-25 21:44:43.404005', 1, 1, 1),
+(2, 1, '2023-06-25 21:45:37.404324', 2, 1, 1),
+(3, 1, '2023-06-25 21:47:28.010011', 3, 1, 1),
+(4, 1, '2023-06-25 22:14:31.353327', 4, 1, 1),
+(5, 1, '2023-06-25 22:14:31.353327', 4, 2, 1);
 
 --
 -- Indexes for dumped tables
@@ -707,26 +664,20 @@ ALTER TABLE `django_session`
   ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
 
 --
+-- Indexes for table `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pedidos_user_id_c7db7ff2_fk_auth_user_id` (`user_id`);
+
+--
 -- Indexes for table `pedidos_lineapedido`
 --
 ALTER TABLE `pedidos_lineapedido`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `pedidos_lineapedido_user_id_096951d1_fk_auth_user_id` (`user_id`),
-  ADD KEY `pedidos_lineapedido_pedido_id_8e7e2da6_fk_pedidos_pedido_id` (`pedido_id`),
-  ADD KEY `pedidos_lineapedido_producto_id_4ae1f0c1_fk_core_producto_id` (`producto_id`);
-
---
--- Indexes for table `pedidos_pedido`
---
-ALTER TABLE `pedidos_pedido`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `pedidos_pedido_user_id_fa9489fb_fk_auth_user_id` (`user_id`);
-
---
--- Indexes for table `pedidos_tiposeguimiento`
---
-ALTER TABLE `pedidos_tiposeguimiento`
-  ADD PRIMARY KEY (`id`);
+  ADD KEY `pedidos_lineapedido_pedido_id_8e7e2da6_fk_pedidos_id` (`pedido_id`),
+  ADD KEY `pedidos_lineapedido_producto_id_4ae1f0c1_fk_core_producto_id` (`producto_id`),
+  ADD KEY `pedidos_lineapedido_user_id_096951d1_fk_auth_user_id` (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -748,25 +699,25 @@ ALTER TABLE `auth_group`
 -- AUTO_INCREMENT for table `auth_group_permissions`
 --
 ALTER TABLE `auth_group_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `auth_user_groups`
 --
 ALTER TABLE `auth_user_groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `auth_user_user_permissions`
@@ -778,49 +729,43 @@ ALTER TABLE `auth_user_user_permissions`
 -- AUTO_INCREMENT for table `core_producto`
 --
 ALTER TABLE `core_producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `core_tipoproducto`
 --
 ALTER TABLE `core_tipoproducto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+
+--
+-- AUTO_INCREMENT for table `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pedidos_lineapedido`
 --
 ALTER TABLE `pedidos_lineapedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-
---
--- AUTO_INCREMENT for table `pedidos_pedido`
---
-ALTER TABLE `pedidos_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-
---
--- AUTO_INCREMENT for table `pedidos_tiposeguimiento`
---
-ALTER TABLE `pedidos_tiposeguimiento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -867,18 +812,18 @@ ALTER TABLE `django_admin_log`
   ADD CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 
 --
+-- Constraints for table `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD CONSTRAINT `pedidos_user_id_c7db7ff2_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+
+--
 -- Constraints for table `pedidos_lineapedido`
 --
 ALTER TABLE `pedidos_lineapedido`
-  ADD CONSTRAINT `pedidos_lineapedido_pedido_id_8e7e2da6_fk_pedidos_pedido_id` FOREIGN KEY (`pedido_id`) REFERENCES `pedidos_pedido` (`id`),
+  ADD CONSTRAINT `pedidos_lineapedido_pedido_id_8e7e2da6_fk_pedidos_id` FOREIGN KEY (`pedido_id`) REFERENCES `pedidos` (`id`),
   ADD CONSTRAINT `pedidos_lineapedido_producto_id_4ae1f0c1_fk_core_producto_id` FOREIGN KEY (`producto_id`) REFERENCES `core_producto` (`id`),
   ADD CONSTRAINT `pedidos_lineapedido_user_id_096951d1_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
-
---
--- Constraints for table `pedidos_pedido`
---
-ALTER TABLE `pedidos_pedido`
-  ADD CONSTRAINT `pedidos_pedido_user_id_fa9489fb_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

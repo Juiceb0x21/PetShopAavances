@@ -7,7 +7,6 @@
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-    
 <div class="all-title-box">
         <div class="container">
             <div class="row">
@@ -40,10 +39,24 @@
                                 {% if aux.user_id == user.id %}
                                 <tbody>
                                     <tr>
-                                        <td>{{aux.id}}</td>
-                                        <td>{{aux.user}}</td>
-                                        <td>{{aux.create_at|date:'Y-m-d'}}</td>
-                                        <td><a href="{% url 'detallepedido' aux.id%}">Detalle</a></td>
+                                        <td class="name-pr">
+                                            <a href="#">
+                                                {{aux.id}}
+                                            </a>
+                                        </td>
+                                        <td class="name-pr">
+                                            <a href="#">
+                                                {{aux.user}}
+                                            </a>
+                                        </td>
+                                        <td class="name-pr">
+                                            <a href="#">
+                                                {{aux.created_at|date:'d/m/Y'}}
+                                            </a>
+                                        </td>
+                                        <td><a class="btn hvr-hover" href="{% url 'detallepedido' aux.id %}" readonly style="border:0; color:#FFFFFF; font-weight:bold;">Detalle</a>
+                                        </td>
+                                        
                                     </tr>
                                 </tbody>
                                 {% endif %}
@@ -62,9 +75,7 @@
                 </div>
                 
             </div>
-            
         </div>
-        
     </div>
     
   
