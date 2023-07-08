@@ -9,17 +9,17 @@ from django.db.models import F, Sum, FloatField
 from datetime import datetime
 # Create your models here.
 
-class Pedido(models.Model):
-    ESTADO_CHOICES = (
-        ('Pendiente', 'Pendiente'),
-        ('En proceso', 'En proceso'),
-        ('Completado', 'Completado'),
-        ('Cancelado', 'Cancelado'),
-    )
+class TipoSeguimiento(models.Model):
+    seguimiento = models.CharField(max_length=50)
+    
+    def __str__(self):
+        return self.seguimiento
 
+
+class Pedido(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=datetime.now) 
-    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='pendiente')
+    seguimiento = models.ForeignKey(TipoSeguimiento, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return str(self.id)

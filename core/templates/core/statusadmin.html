@@ -2,8 +2,8 @@
 
 {% load static %}
 
-{% block contenido %}
 
+{% block contenido %}
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
@@ -36,45 +36,40 @@
                                     <th>Detalle</th>
                                 </tr>
                             </thead>
-                            {% for aux in LineaPedido %}
-                                {% if aux.user_id == user.id %}
-                                <tbody>
-                                    <tr>
-                                        <td class="name-pr">
-                                            <a href="#">
-                                                #{{aux.id}}
-                                            </a>
-                                        </td>
-                                        
-                                        <td class="name-pr">
-                                            <a href="#">
-                                                {{aux.user}}
-                                            </a>
-                                        </td>
-                                        <td class="name-pr">
-                                            <a href="#">
-                                                {{aux.created_at|time:'H:i' }}
-                                            </a>
-                                        </td>
-                                        <td class="name-pr">
-                                            <a href="#">
-                                                {{aux.created_at|date:'d/m/Y'}}
-                                            </a>
-                                        </td>
-                                        <td><a class="btn hvr-hover" href="{% url 'detallepedido' aux.id %}" readonly style="border:0; color:#FFFFFF; font-weight:bold;">Detalle Pedido</a>
-                                        </td>
-                                        
-                                    </tr>
-                                </tbody>
-                                {% endif %}
-                            {% endfor %}
+                            {% for aux in pedido %}
+                            <tbody>
+                                <tr>
+                                    <td class="name-pr">
+                                        <a href="#">
+                                            #{{aux.id}}
+                                        </a>
+                                    </td>
+                                    <td class="name-pr">
+                                        <a href="#">
+                                            {{aux.user}}
+                                        </a>
+                                    </td>
+                                    <td class="name-pr">
+                                        <a href="#">
+                                            {{aux.created_at|date:'d/m/Y'}}
+                                        </a>
+                                    </td>
+                                    <td class="name-pr">
+                                        <a href="#">
+                                            {{aux.created_at|time:'H:i' }}
+                                        </a>
+                                    </td>
+                                    <td><a class="btn hvr-hover" href="{% url 'detallepedido' aux.id %}" readonly style="border:0; color:#FFFFFF; font-weight:bold;">Detalle Pedido</a>
+                                    </td>
+                                </tr>  
+                            </tbody>  
+                        {% endfor %}
                         </table>    
                     </div>
                     <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
                         <div class="product-categori">
                             <div class="filter-sidebar-left">
                                 <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
-                                    
                                 </div>
                             </div>
                         </div>

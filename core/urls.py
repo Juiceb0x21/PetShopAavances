@@ -6,7 +6,9 @@ from rest_framework import routers
 #CREAMOS RUTAS API
 router = routers.DefaultRouter()
 router.register('productos', ProductoViewset)
-router.register('TipoProductos', ProductoViewset)
+router.register('tipoproductos', TipoProductoViewset)
+router.register('pedido', PedidoViewset)
+router.register('lineapedido', LineaPedidoViewset)
 
 urlpatterns = [
         #API
@@ -18,6 +20,7 @@ urlpatterns = [
         path('about/', about, name="about"),
         path('agregar/', agregar, name="agregar"),
         path('wishlist/', wishlist, name="wishlist"),
+        path('statusadmin/', statusadmin, name="statusadmin"),
         path('subscripcion/', subscripcion, name="subscripcion"),
         path('cart/', cart, name="cart"),
         path('checkout/', checkout, name="checkout"),
@@ -32,6 +35,10 @@ urlpatterns = [
         path('usuario/', usuario, name='usuario'),
         path('status/', status, name='status'),
         path('detallepedido/<id>/', detallepedido, name="detallepedido"),
+        path('updatepedido/<id>/', updatepedido, name="updatepedido"),
+        path('undopedido/<id>/', undopedido, name="undopedido"),
+        path('cancelarpedido/<id>/', cancelarpedido, name="cancelarpedido"),
+        path('regresarpedido/<id>/', regresarpedido, name="regresarpedido"),
         
 
         path('product/', product, name="product"),

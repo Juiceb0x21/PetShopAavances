@@ -4,6 +4,8 @@
 
 {% block contenido %}
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
 <div class="wishlist-box-main">
     <div class="container">
         <div class="row">    
@@ -32,13 +34,47 @@
                                     </td>
                                 </tr>
                             </tbody>
-                           
                         {% endfor %}
                     </table>    
                 </div>
                 <div class="container text-center mt-5">
-                    <h1 class="display-4">Estado: {{pedido.estado}}</h1>
+                    {% if pedido.seguimiento_id == 1 %}
+                    <h1 class="display-4">Estado: Validando</h1>
+                    {% elif pedido.seguimiento_id == 2 %}
+                    <h1 class="display-4">Estado: En Proceso</h1>
+                    {% elif pedido.seguimiento_id == 3 %}
+                    <h1 class="display-4">Estado: Entregando</h1>
+                    {% elif pedido.seguimiento_id == 4 %}
+                    <h1 class="display-4">Estado: Completado</h1>
+                    {% elif pedido.seguimiento_id == 5 %}
+                    <h1 class="display-4">Estado: Cancelado</h1>
+                    {% endif %}
+                    {% if user.is_superuser and pedido.seguimiento_id <= 4  and  pedido.seguimiento_id > 1 %}
+                    <a class="btn hvr-hover" href="{% url 'undopedido' pedido.id %}" readonly style="border:0; color:#FFFFFF; font-weight:bold;">Regresar pedido </a>
+                    {% endif %}
+                    {% if user.is_superuser and pedido.seguimiento_id < 4 %}
+                    <a class="btn hvr-hover" href="{% url 'updatepedido' pedido.id %}" readonly style="border:0; color:#FFFFFF; font-weight:bold;">Actualizar pedido</a>
+                    {% endif %}
                 </div>
+                
+                <div class="container text-center mt-5">
+                    {% if pedido.seguimiento_id == 1 %}
+                    <h1 class="display-5"><i class="fa-regular fa-clock fa-best-fade fa-xl" style="color: #f9e71f;"></i></h1>
+                    {% elif pedido.seguimiento_id == 2 %}
+                    <h1 class="display-5"><i class="fa-regular fa-clock fa-best-fade fa-xl" style="color: #f9e71f;"></i></h1>
+                    {% elif pedido.seguimiento_id == 3 %}
+                    <h1 class="display-5"><i class="fa-solid fa-truck-fast fa-beat-fade fa-xl" style="color: #0b5c26;"></i></h1>
+                    {% elif pedido.seguimiento_id == 4 %}
+                    <h1 class="display-5"><i class="fa-solid fa-boxes-packing fa-beat-fade fa-xl" style="color: #00d647;"></i></h1>
+                    {% elif pedido.seguimiento_id == 5 %}
+                    <h1 class="display-5"><i class="fa-solid fa-ban fa-beat-fade fa-xl" style="color: #ff0000;"></i></h1>
+                    {% endif %}
+                </div>
+                {% if pedido.seguimiento_id == 5 %}
+                <a class="btn hvr-hover" href="{% url 'regresarpedido' pedido.id %}" readonly style="border:0; color:#FFFFFF; font-weight:bold;">Omitir Cancelacion</a>
+                {% else %}
+                <a class="btn hvr-hover" href="{% url 'cancelarpedido' pedido.id %}" readonly style="border:0; color:#FFFFFF; font-weight:bold;">Cancelar Pedido</a>
+                {% endif %}
             </div>
             
         </div>

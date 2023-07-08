@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2023 at 05:03 AM
+-- Generation Time: Jul 09, 2023 at 01:52 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -249,7 +249,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (41, 'Can add pedido', 11, 'add_pedido'),
 (42, 'Can change pedido', 11, 'change_pedido'),
 (43, 'Can delete pedido', 11, 'delete_pedido'),
-(44, 'Can view pedido', 11, 'view_pedido');
+(44, 'Can view pedido', 11, 'view_pedido'),
+(45, 'Can add tipo seguimiento', 12, 'add_tiposeguimiento'),
+(46, 'Can change tipo seguimiento', 12, 'change_tiposeguimiento'),
+(47, 'Can delete tipo seguimiento', 12, 'delete_tiposeguimiento'),
+(48, 'Can view tipo seguimiento', 12, 'view_tiposeguimiento');
 
 -- --------------------------------------------------------
 
@@ -276,7 +280,8 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$216000$NaxboLfEhI3X$vC/EXLW548rhl0KwHtETsCSwsZCkaRNhH6t93WGoOhU=', '2023-06-26 01:44:16.472269', 1, 'alex', '', '', 'al.pavezf@duocuc.cl', 1, 1, '2023-06-06 13:22:15.172069');
+(1, 'pbkdf2_sha256$216000$NaxboLfEhI3X$vC/EXLW548rhl0KwHtETsCSwsZCkaRNhH6t93WGoOhU=', '2023-07-08 23:30:58.611191', 1, 'alex', '', '', 'al.pavezf@duocuc.cl', 1, 1, '2023-06-06 13:22:15.172069'),
+(2, 'pbkdf2_sha256$216000$SGMGqOYl9Koz$1tqQULOY/mdc9IGhCesSu5Qy4y4U1bNSopa8I3ylblk=', '2023-07-08 23:24:30.863367', 0, 'manuelsoto', '', '', 'manuelsoto@gmail.com', 0, 1, '2023-07-08 23:22:08.909752');
 
 -- --------------------------------------------------------
 
@@ -295,7 +300,8 @@ CREATE TABLE `auth_user_groups` (
 --
 
 INSERT INTO `auth_user_groups` (`id`, `user_id`, `group_id`) VALUES
-(1, 1, 4);
+(1, 1, 4),
+(2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -331,8 +337,8 @@ CREATE TABLE `core_producto` (
 
 INSERT INTO `core_producto` (`id`, `nombre`, `precio`, `stock`, `imagen`, `tipo_id`, `descripcion`) VALUES
 (1, 'Correa para perro', 15000, 11, 'correa_larga_de_entrenamiento_1.jpg', 5, 'Correa para perro'),
-(2, 'Jaula para animales', 16000, 19, 'S01140100V_1.jpg', 2, 'Una jaula qe permite mover a tu animalito por distintos lugares, tanto gato, perro, etc...'),
-(3, 'Cama para perro', 52990, 53, 'CAMA-BEIGE.jpg', 3, 'Cama comoda de tamaño mediano para tu animalito de casa'),
+(2, 'Jaula para animales', 16000, 18, 'S01140100V_1.jpg', 2, 'Una jaula qe permite mover a tu animalito por distintos lugares, tanto gato, perro, etc...'),
+(3, 'Cama para perro', 52990, 52, 'CAMA-BEIGE.jpg', 3, 'Cama comoda de tamaño mediano para tu animalito de casa'),
 (4, 'Rascador para gato', 17890, 15, 'rascador-tubo-con-juguete-para-gatos.jpg', 4, 'Rascador para gatos de tamaño pequeño.'),
 (5, 'Juguete para perro', 7000, 23, 'goma.jpg', 1, 'Juguete para perro con forma de huesito'),
 (6, 'Cama para gato', 23000, 32, 'gato.jpg', 3, 'Cama para gato de tamaño mediano.'),
@@ -422,6 +428,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (8, 'core', 'tipoproducto'),
 (10, 'pedidos', 'lineapedido'),
 (11, 'pedidos', 'pedido'),
+(12, 'pedidos', 'tiposeguimiento'),
 (7, 'sessions', 'session');
 
 -- --------------------------------------------------------
@@ -494,7 +501,8 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (50, 'pedidos', '0001_initial', '2023-06-26 01:43:47.095146'),
 (51, 'pedidos', '0002_pedido_estado', '2023-06-26 01:46:25.027033'),
 (52, 'pedidos', '0003_lineapedido_estado', '2023-06-26 01:48:18.556289'),
-(53, 'pedidos', '0004_remove_lineapedido_estado', '2023-06-26 02:22:55.403703');
+(53, 'pedidos', '0004_remove_lineapedido_estado', '2023-06-26 02:22:55.403703'),
+(54, 'pedidos', '0005_auto_20230708_1848', '2023-07-08 22:48:20.786781');
 
 -- --------------------------------------------------------
 
@@ -514,8 +522,10 @@ CREATE TABLE `django_session` (
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 ('04ozr1rdt49q08lzq13926151guakd5s', '.eJxVjEEOgyAQRe8y64YwCFhcdt8zmBkYq20jCejKePfWxI3b_977G0QqJUO37TfoaV3Gfq1S-ilBBwiXjSl-ZD5AetP8yirmeSkTq0NRJ63qmZN8H6d7ORipjv-6da2kYMho0g7joA0PwbLEYJC8ZW6Ctz5FZwTFOq-xEZL2PgRG1I2F_Qd00ztI:1qDc1l:pp5ziX1QWZHDcrwivVbbI_MXjZyCwggEPAiI3Oa1V04', '2023-07-10 02:32:29.271497'),
+('9mzsao0hp3hvxfo8noe9eo0vhxn6w7dl', '.eJxVjEEOgyAQRe8y64YwCFhcdt8zmBkYq20jCejKePfWxI3b_977G0QqJUO37TfoaV3Gfq1S-ilBBwiXjSl-ZD5AetP8yirmeSkTq0NRJ63qmZN8H6d7ORipjv-6da2kYMho0g7joA0PwbLEYJC8ZW6Ctz5FZwTFOq-xEZL2PgRG1I2F_Qd00ztI:1qIHiD:M-uKw04wJEMkepoftBjuBA-b2EDiygccAYffkj_Mcy4', '2023-07-22 23:51:37.007685'),
 ('cy6zdz644b1u7p93xwseqdi3qan8zs8e', '.eJxVkMFuwyAMhl9l4hylQEIyeuzOewZkwEnoGohIcqry7jVtNW0XC_3-_882d2Zg3yazr5hN8OzMBKv-ahbcD8bS8FeIY6pdilsOti6W-t1d6-_k8XZ5e_8BJlgnSveqR68lSA5cCTdwaQfdWnRaCuhaaxvdtZ13SqLAVnVcNAjYfw7aCsGblqAOck7sfKcVqSw5-d1t6bm1qFhMs81Ik75SzggfC2QqWCIVmdGFVK5TnPNfQVKyCIUdt-DhhQozjBjJfZrRBzi5J9HcII9gPBqkH8AIc6BHMqK-LiM7juMB6E5sfg:1q8vRD:EcslEXbScNTUBmlePYJ1dqVXdE4pIaC-ji5_cm4SQcw', '2023-06-27 04:15:23.037102'),
-('zc7jhb6z288l1rwqdvj1a45l4a7ae47i', '.eJxVjk1ugzAQha9SzRo5tjFQWKbrnsEa2wM4DTYysIq4e-00qpTN0-j9fJoHWEwpwvAAUWRN0R12j9o7GEQFIS4mEQzwFVMi_FgxZaEyqXKZrM9bEA3n_N-QeVmMKrPD7h3-ofyCE4XcvizkPF7sk6jvmCbUjjSFPVHAxecjasFu6wTnWYHGY5_1sVF6PpX_fPMM2h8KJXA3DFNkNmaQN6xU2Cvd2Hd0dL--um-AGbc5r7umI9dLlBx5I-zIpRl7Zcj2UmCrjKn7VrXONpIEqabloiak7nPsjRC8VnD-Ap8RbH4:1q6WnN:MDlLaXyhDORcxIHCBVk8CC-9k-itn-guihK5gBqXLsM', '2023-06-20 13:32:21.657845');
+('zc7jhb6z288l1rwqdvj1a45l4a7ae47i', '.eJxVjk1ugzAQha9SzRo5tjFQWKbrnsEa2wM4DTYysIq4e-00qpTN0-j9fJoHWEwpwvAAUWRN0R12j9o7GEQFIS4mEQzwFVMi_FgxZaEyqXKZrM9bEA3n_N-QeVmMKrPD7h3-ofyCE4XcvizkPF7sk6jvmCbUjjSFPVHAxecjasFu6wTnWYHGY5_1sVF6PpX_fPMM2h8KJXA3DFNkNmaQN6xU2Cvd2Hd0dL--um-AGbc5r7umI9dLlBx5I-zIpRl7Zcj2UmCrjKn7VrXONpIEqabloiak7nPsjRC8VnD-Ap8RbH4:1q6WnN:MDlLaXyhDORcxIHCBVk8CC-9k-itn-guihK5gBqXLsM', '2023-06-20 13:32:21.657845'),
+('zjdb4achdsfgmyyb9zncc27mf4bn7j1m', 'eyJjYXJybyI6e319:1qIG3d:Wu-0uIDW_wuCPN8ji61AZOUpPlZ85gZVdiJLOE5wy_o', '2023-07-22 22:05:37.130981');
 
 -- --------------------------------------------------------
 
@@ -527,18 +537,20 @@ CREATE TABLE `pedidos` (
   `id` int(11) NOT NULL,
   `created_at` datetime(6) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `estado` varchar(20) NOT NULL
+  `seguimiento_id` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pedidos`
 --
 
-INSERT INTO `pedidos` (`id`, `created_at`, `user_id`, `estado`) VALUES
-(1, '2023-06-25 21:44:43.317456', 1, 'pendiente'),
-(2, '2023-06-25 21:45:37.314700', 1, 'pendiente'),
-(3, '2023-06-25 21:47:27.949006', 1, 'pendiente'),
-(4, '2023-06-25 22:14:31.248308', 1, 'pendiente');
+INSERT INTO `pedidos` (`id`, `created_at`, `user_id`, `seguimiento_id`) VALUES
+(1, '2023-06-25 21:44:43.317456', 1, 3),
+(2, '2023-06-25 21:45:37.314700', 1, 5),
+(3, '2023-06-25 21:47:27.949006', 1, 4),
+(4, '2023-06-25 22:14:31.248308', 1, 4),
+(5, '2023-07-08 19:22:38.299737', 2, 4),
+(6, '2023-07-08 19:31:30.747966', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -564,7 +576,31 @@ INSERT INTO `pedidos_lineapedido` (`id`, `cantidad`, `created_at`, `pedido_id`, 
 (2, 1, '2023-06-25 21:45:37.404324', 2, 1, 1),
 (3, 1, '2023-06-25 21:47:28.010011', 3, 1, 1),
 (4, 1, '2023-06-25 22:14:31.353327', 4, 1, 1),
-(5, 1, '2023-06-25 22:14:31.353327', 4, 2, 1);
+(5, 1, '2023-06-25 22:14:31.353327', 4, 2, 1),
+(6, 1, '2023-07-08 19:22:38.377107', 5, 2, 2),
+(7, 1, '2023-07-08 19:31:30.845995', 6, 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pedidos_tiposeguimiento`
+--
+
+CREATE TABLE `pedidos_tiposeguimiento` (
+  `id` int(11) NOT NULL,
+  `seguimiento` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pedidos_tiposeguimiento`
+--
+
+INSERT INTO `pedidos_tiposeguimiento` (`id`, `seguimiento`) VALUES
+(1, 'Validando'),
+(2, 'En Proceso'),
+(3, 'Entregando'),
+(4, 'Completado'),
+(5, 'Cancelado');
 
 --
 -- Indexes for dumped tables
@@ -680,6 +716,12 @@ ALTER TABLE `pedidos_lineapedido`
   ADD KEY `pedidos_lineapedido_user_id_096951d1_fk_auth_user_id` (`user_id`);
 
 --
+-- Indexes for table `pedidos_tiposeguimiento`
+--
+ALTER TABLE `pedidos_tiposeguimiento`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -705,19 +747,19 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `auth_user_groups`
 --
 ALTER TABLE `auth_user_groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `auth_user_user_permissions`
@@ -747,24 +789,30 @@ ALTER TABLE `django_admin_log`
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pedidos_lineapedido`
 --
 ALTER TABLE `pedidos_lineapedido`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `pedidos_tiposeguimiento`
+--
+ALTER TABLE `pedidos_tiposeguimiento`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
