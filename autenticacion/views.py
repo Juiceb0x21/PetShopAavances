@@ -33,6 +33,7 @@ from .forms import CustomUserCreationForm
                 
             return render(request, 'registro/registro.html', {"form":form} )"""
 
+
 def register(request):
     if request.method == 'POST':
         f = CustomUserCreationForm(request.POST)
@@ -43,7 +44,7 @@ def register(request):
             login(request, usuario)
 
             cliente = User.objects.get(username = usuario.username)
-            cliente.groups.add(2)
+            cliente.groups.add(1)
             cliente.save()
 
             return redirect('index')

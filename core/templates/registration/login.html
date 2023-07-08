@@ -10,8 +10,9 @@
     <div class="row">
         <div class="col-12 m-5">
             <form method="POST">
-    {% csrf_token %}
-    {{ form | crispy }}
+              {% csrf_token %}
+              {{ form | crispy }}
+            
  
     <!-- 2 column grid layout for inline styling -->
     <div class="row mb-4">
@@ -28,7 +29,6 @@
         <a href="#!">Forgot password?</a>
       </div>
     </div>
-  
     <!-- Submit button -->
     <input type="submit" class="btn btn-primary btn-block" value="Ingresar">
   </form>

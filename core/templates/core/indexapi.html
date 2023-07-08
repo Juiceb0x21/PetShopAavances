@@ -1,210 +1,113 @@
-    {% extends 'core/base.html' %}
+{% extends 'core/base.html' %}
 
-    {% load static %}
+{% load static %}
 
-    {% block contenido %}
-    
-    <div class="top-search">
-        <div class="container">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+{% block contenido %}
+
+<!-- Start All Title Box -->
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Mis Productos</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+                    <li class="breadcrumb-item active"> Productos </li>
+                </ul>
             </div>
         </div>
     </div>
-    <!-- Start Slider -->
-    <div id="slides-shop" class="cover-slides">
-        <ul class="slides-container">
-            <li class="text-center">
-                <img src="{% static 'core/images/perro-lentes.jpeg' %}" alt="">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="m-b-20"><strong>Bienvenidos a <br> PetShop</strong></h1>
-                            <p class="m-b-25">"¡Bienvenido a nuestra tienda de mascotas, donde los peludos son nuestra pasión! Encuentra todo lo que necesitas para consentir a tu fiel compañero." <br> ellos aprecian mucho tu ayuda!</p>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="text-center">
-                <img src="{% static 'core/images/gatito-perro.jpeg' %}" alt="">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="m-b-20"><strong>Bienvenidos a <br> PetShop</strong></h1>
-                            <p class="m-b-40">"¡Bienvenido a nuestra tienda de mascotas, donde los peludos son nuestra pasión! Encuentra todo lo que necesitas para consentir a tu fiel compañero."</p>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="text-center">
-                <img src="{% static 'core/images/perrito.jpeg' %}" alt="">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="m-b-20"><strong>Bienvenidos a <br> PetShop</strong></h1>
-                            <p class="m-b-40">"¡Bienvenido a nuestra tienda de mascotas, donde los peludos son nuestra pasión! Encuentra todo lo que necesitas para consentir a tu fiel compañero." <br> ellos aprecian mucho tu ayuda!</p>
+</div>
+<!-- End All Title Box -->
 
+<div class="shop-box-inner">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
+                <div class="right-product-box">
+                    <div class="product-item-filter row">
+                        <div class="col-8 col-sm-7 text-center text-sm-left">
+                            <p>Productos</p>
+                        </div>
+                        <div class="col-12 col-sm-4 text-center text-sm-right">
+                            <ul class="nav nav-tabs ml-auto">
+                                <li>
+                                    <a class="nav-link active" href="#grid-view" data-toggle="tab"> <i class="fa fa-th"></i> </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-            </li>
-        </ul>
 
-    </div>
-    <!-- End Slider -->
-
-    <!-- Start Categories  -->
-
-    <!-- End Categories -->
-	
-    <!-- Start Products  -->
-    <div class="products-box">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="title-all text-center">
-                        <h1>Productos de confianza</h1>
-                        <p>Vendemos calidad para tus mascotas</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="special-menu text-center">
-                        <div class="button-group filter-button-group">
-                            <button class="active" data-filter="*">Todos</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                    <div class="row">
-                        <div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
-                            <h2>Nuestros Productos</h2>
-                        </div>
-                    </div>
-                    <div class="row my-5">
-                        {% for aux in listaProducto %}
-                        <div class="col-md-6 col-lg-3 text-center">
-                            <div class="product-entry border">
-                                <a href="#" class="prod-img">
-                                    <img src="{{ aux.imagen.url }}" class="img-fluid" alt="Free html5 bootstrap 4 template">
-                                </a>
-                                <div class="desc">
-                                    
-                                        {% if user.is_authenticated %}
-                                    <h2><a href="{% url 'productdetail' aux.id %}">{{ aux.nombre }}</a></h2>
-                                    <h2><span class="price">${{ aux.precio }}</span></h2>
-                                    <a href="{% url 'update' aux.id %}" class="fa fa-pen">
-                                        <span><i class="ion-ios-heart"></i></span>
-                                    </a>
-                                    <a href="{% url 'delete' aux.id %}" class="fa fa-trash">
-                                        
-                                    <span><i class="ion-ios-heart"></i></span></a> 
-                                    
-                                    {% if aux.stock > 0 %}
-                                    <h2><span class="price">Disponible: {{aux.stock}}</span></h2>
-                                    <h2><a href="{% url 'carro:agregar' aux.id %}" class="fa fa-shopping-bag"></a></h2>
-                                    {% else %}
-                                    <h2> No hay stock <h2>
-                                     {% endif %}
-                                     
-                                     
-                                     {% else %}
-                                     <h2><a href="{% url 'productdetail' aux.id %}">{{ aux.nombre }}</a></h2>
-                                     <h2><span class="price">${{ aux.precio }}</span></h2>
-                                     <h2><span class="price">Disponible: {{aux.stock}}</span></h2>
-                                     <h2><a href="{% url 'carro:agregar' aux.id %}" class="fa fa-shopping-bag"></a></h2>
-                                    {% endif %}
-									
-									
-									
+                    <div class="product-categorie-box">
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
+                                <div class="row">
+                                    {% for aux in listaProductos %}
+                                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                        <div class="products-single fix">
+                                            <div class="box-img-hover">
+                                                <img src="{{ aux.imagen.url }}" class="img-fluid" alt="Image">
+                                                <div class="mask-icon">
+                                                    <ul>
+                                                        <li><a href="{% url 'productdetail' aux.id %}" data-toggle="tooltip" data-placement="right" title="Detalle"><i class="fas fa-eye"></i></a></li>
+                                                        {% if user.is_superuser %}
+                                                        <li><a href="{% url 'update' aux.id %}" data-toggle="tooltip" data-placement="right" title="Editar"><i class="fas fa-pen"></i></a></li>
+                                                        <li><a href="{% url 'delete' aux.id %}" data-toggle="tooltip" data-placement="right" title="Eliminar"><i class="fas fa-trash"></i></a></li>
+                                                        {% endif %}
+                                                    </ul>
+                                                    <a class="cart" href="{% url 'carro:agregar' aux.id %}">Añadir al carrito</a>
+                                                </div>
+                                            </div>
+                                            <div class="why-text">
+                                                <h4>{{ aux.nombre }}</h4>
+                                                <h5>${{ aux.precio }}</h5>
+                                                {% if aux.stock > 0 %}
+                                                <h5>Disponible: {{ aux.stock }}</h5>
+                                                {% else %}
+                                                <h5>Disponible: Sin Stock</h5>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
                                 </div>
-                                
+                                {% include 'core/paginator.html' %}
                             </div>
-                        </div>	
-                     {% endfor %}
-                </div>
-                {% include 'core/paginator.html' %}  
-                {% for aux in personajes %}    
-                    <p>Nombre: {aux.name'}- Raze: {{aux.raze}} </p>
-                {% endfor %}
-            </div>
-        </div>
-    <!-- End Products  -->
-
-    <!-- Start Blog  -->
-
-    <div class="latest-blog">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="title-all text-center">
-                        <h1>Último blog</h1>
-                        <p>Bienvenido a nuestro último blog, donde compartimos consejos y noticias sobre mascotas.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6 col-lg-4 col-xl-4">
-                    <div class="blog-box">
-                        <div class="blog-img">
-                            <img class="img-fluid" src="{% static 'core/images/gatito.jpeg' %}" alt="" />
+            <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
+                <div class="product-categori">
+                    <div class="search-product">
+                        <form action="#">
+                            <input class="form-control" placeholder="Busca aqui.." type="text">
+                            <button type="submit"> <i class="fa fa-search"></i> </button>
+                        </form>
+                    </div>
+                    <div class="filter-sidebar-left">
+                        <div class="title-left">
+                            <h3>Descuentos</h3>
                         </div>
-                        <div class="blog-content">
-                            <div class="title-blog">
-                                <h3>Apoya a una fundacion</h3>
-                                <p>Descubre cómo cuidar adecuadamente a tu mascota con nuestros consejos útiles.</p>
-                            </div>
-                            <ul class="option-blog">
-                                <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#"><i class="far fa-comments"></i></a></li>
-                            </ul>
+                        <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
+                            <p>5% de descuento para usuarios subscriptores</p>
+                            <a class="btn hvr-hover" href="{% url 'about' %}" readonly style="border:0; color:#FFFFFF; font-weight:bold;">Subscribete ahora!!</a>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-xl-4">
-                    <div class="blog-box">
-                        <div class="blog-img">
-                            <img class="img-fluid" src="{% static 'core/images/gato.jpeg'%}" alt= />
-                        </div>
-                        <div class="blog-content">
-                            <div class="title-blog">
-                                <h3>Todo para tus mascotas</h3>
-                                <p>Conoce las últimas tendencias en productos y accesorios para tu mascota.</p>
-                            </div>
-                            <ul class="option-blog">
-                                <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#"><i class="far fa-comments"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-xl-4">
-                    <div class="blog-box">
-                        <div class="blog-img">
-                            <img class="img-fluid" src="{% static 'core/images/perro-reno.jpeg' %}" alt="" />
-                        </div>
-                        <div class="blog-content">
-                            <div class="title-blog">
-                                <h3>Los mejores productos para tus mascotas </h3>
-                                <p>Consigue descuentos con una suscripción</p>
-                            </div>
-                            <ul class="option-blog">
-                                <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#"><i class="far fa-comments"></i></a></li>
-                            </ul>
+                    <div class="filter-price-left">
+                        <div class="price-box-slider">
+                            <div id="slider-range"></div>
+                            <p>
+                                <input type="text" id="amount" readonly style="border:0; color:#fbb714; font-weight:bold;">
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End Blog  -->
+</div>
 
-    {% endblock %}
-    
+<!-- End Shop Page -->
+              
+{% endblock %}

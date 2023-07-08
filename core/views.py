@@ -24,6 +24,15 @@ class TipoProductoViewset(viewsets.ModelViewSet):
     queryset = TipoProducto.objects.all()
     serializer_class = TipoProductoSerializers
 
+class PedidoViewset(viewsets.ModelViewSet):
+    queryset = Pedido.objects.all()
+    serializer_class = PedidoSerializers
+
+class LineaPedidoViewset(viewsets.ModelViewSet):
+    queryset = LineaPedido.objects.all()
+    serializer_class = LineaPedidoSerializers    
+
+
 #funcion generica que valida el grup
 
 def grupo_requerido(nombre_grupo):
@@ -54,22 +63,17 @@ def index(request):
     return render(request, 'core/index.html', data)
 
 def indexapi(request):
-    respuesta = requests.get('http://127.0.0.1:8000/api/TipoProductos/')
-    respuesta2 = requests.get('http://mindicator.cl/api/')
-    respuesta3 = requests.get('https://rickandmortyapi.com/api/characters/')
+    respuesta = requests.get('http://127.0.0.1:8000/api/productos/')
+    respuesta2 = requests.get('https://mindicador.cl/api')
 
-    #TRANSFORMACION A JSON
     productos = respuesta.json()
     monedas = respuesta2.json()
-    aux = respuesta3.json()
-    personajes = aux['results']
-
+    
     data = {
-        'listaProducto': productos,
-        'moneda': monedas,
-        'personajes': personajes,
+        'listado': productos,
+        'moneda': monedas
     }
-
+    
     return render(request, 'core/indexapi.html', data)
 
 @login_required
@@ -127,6 +131,13 @@ def historial(request):
 
 def contactus(request):
     return render(request, 'core/contact-us.html')
+
+def statusadmin(request):
+    pedido = Pedido.objects.all()
+    data = {
+        'pedido' : pedido
+    }
+    return render(request, 'core/statusadmin.html', data)
 
 @login_required
 def agregar(request):
@@ -252,8 +263,43 @@ def status(request):
     return render(request, 'core/status.html', data )
 
 def quitar_usuario_de_grupo(request, id):
-
     usuario = User.objects.get(id=id)
     grupo = Group.objects.get(id=1)
     usuario.groups.remove(4)
     return redirect('status')
+
+def updatepedido(request, id):
+    pedido = Pedido.objects.get(id=id)
+    idconv = int(pedido.seguimiento_id)
+    idestado = int(idconv + 1)
+    tipo_seguimiento = TipoSeguimiento.objects.get(id=idestado)  
+    pedido.seguimiento = tipo_seguimiento
+    pedido.save()
+    return redirect('../../detallepedido/' + id)
+
+def undopedido(request, id):
+    pedido = Pedido.objects.get(id=id)
+    idconv = int(pedido.seguimiento_id)
+    idestado = int(idconv - 1)
+    tipo_seguimiento = TipoSeguimiento.objects.get(id=idestado)  
+    pedido.seguimiento = tipo_seguimiento
+    pedido.save()
+    return redirect('../../detallepedido/' + id)
+
+def cancelarpedido(request, id):
+    pedido = Pedido.objects.get(id=id)
+    idconv = int(pedido.seguimiento_id)
+    idestado = int(5)
+    tipo_seguimiento = TipoSeguimiento.objects.get(id=idestado)  
+    pedido.seguimiento = tipo_seguimiento
+    pedido.save()
+    return redirect('../../detallepedido/' + id)
+
+def regresarpedido(request, id):
+    pedido = Pedido.objects.get(id=id)
+    idconv = int(pedido.seguimiento_id)
+    idestado = int(1)
+    tipo_seguimiento = TipoSeguimiento.objects.get(id=idestado)  
+    pedido.seguimiento = tipo_seguimiento
+    pedido.save()
+    return redirect('../../detallepedido/' + id)
